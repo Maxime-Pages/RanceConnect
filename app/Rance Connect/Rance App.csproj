@@ -9,4 +9,10 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="Chroma">
+      <HintPath>..\..\lib\Chroma.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
