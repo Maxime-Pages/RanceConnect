@@ -10,7 +10,7 @@ de passer automatiquement des commandes quand des produits vont périmer ou que 
 
 ## Membres
 
-Les mebres du projet sont
+Les membres du projet sont
 - Louis de Lavenne de Choulot de Chabaud-la-Tour
 - Quentin Lemaire
 - Maxime Pages
