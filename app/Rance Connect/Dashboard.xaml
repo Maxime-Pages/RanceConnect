@@ -9,7 +9,29 @@
       Title="Dashboard">
 
     <Grid>
-        <Rectangle HorizontalAlignment="Left" Height="110" Margin="60,30,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" Fill="#FF43484E"/>
+        <Grid Margin="0,0,0,250">
+            <Grid Margin="30,43,0,0" Background="#FF43484E" Panel.ZIndex="19" Height="80" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Stock Total" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,10,0,0"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,53,0,0" FontSize="14"/>
+            </Grid>
+            <Grid Width="100" Margin="190,43,0,0" Background="#FF43484E" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Bientôt Périmés" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,10,0,0" FontSize="12"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,53,0,0" FontSize="14"/>
+            </Grid>
+            <Grid Width="100" Margin="347,43,0,0" Background="#FF43484E" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Produits Périmés" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,10,0,0" FontSize="12"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,53,0,0" FontSize="14"/>
+            </Grid>
+            <Grid Width="100" Margin="510,43,0,0" Background="#FF43484E" VerticalAlignment="Top" HorizontalAlignment="Left" Height="80">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Seuils Atteints" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,10,0,0" FontSize="12"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,53,0,0" FontSize="14"/>
+            </Grid>
+            <Grid Width="100" Margin="670,43,0,0" Background="#FF43484E" HorizontalAlignment="Left" VerticalAlignment="Top" Height="80">
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Nombre d'alertes" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,10,0,0" FontSize="12"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,53,0,0" FontSize="14"/>
+            </Grid>
+        </Grid>
+
 
     </Grid>
 </Page>

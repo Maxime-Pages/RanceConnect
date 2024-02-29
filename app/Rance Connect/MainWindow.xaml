@@ -5,14 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rance_Connect"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="940
+        ">
     <Grid Background="#232628">
-        <Menu Margin="0,0,679,0" Background="#2E333A">
-            <Button Content="Dashboard" Click="Dashboard_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="118" Margin="-6,10,0,10" Background="#2E333A" BorderBrush="#2E333A" Foreground="White"/>
-            <Button Content="Stocks" Click="Stocks_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="118" Margin="-6,10,0,10" Background="#2E333A" BorderBrush="#2E333A" Foreground="White"/>
-            <Button Content="Alertes" Click="Alertes_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="118" Margin="-6,10,0,10" Background="#2E333A" BorderBrush="#2E333A" Foreground="White"/>
-            <Button Content="Historiques Actions" Click="Historique_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="118" Margin="-6,10,0,10" Background="#2E333A" BorderBrush="#2E333A" Foreground="White"/>
+        <Menu Background="#FF2E333A" HorizontalAlignment="Left" Width="140">
+            <Button Content="Dashboard" Click="Dashboard_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="140" Margin="-7,10,0,10" Background="#2E333A" BorderBrush="#2E333A" Foreground="White"/>
+            <Button Content="Stocks" Click="Stocks_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="140" Margin="-7,10,0,10" Background="#2E333A" BorderBrush="#2E333A" Foreground="White"/>
+            <Button Content="Alertes" Click="Alertes_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="50" Width="140" Margin="-7,10,0,10" Background="#2E333A" BorderBrush="#2E333A" Foreground="White"/>
+            <Button Content="Historiques Actions" Click="Historique_Click" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="140" Background="#2E333A" BorderBrush="#2E333A" Foreground="White" Margin="-7,0,0,0"/>
         </Menu>
-        <Frame x:Name="Main" Margin="121,0,0,0" NavigationUIVisibility="Hidden" />
+        <Frame x:Name="Main" Margin="140,0,0,0" NavigationUIVisibility="Hidden" />
     </Grid>
 </Window>
