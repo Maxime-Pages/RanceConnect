@@ -1,0 +1,19 @@
+version: '3.9'
+
+networks:
+  backend:
+    name: rance-db
+
+services:
+  database:
+    container_name: mysql-cont
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=rance
+      - MYSQL_DATABASE=connect
+    ports:
+      - 3306:3306
+    volumes:
+      - /db/data:/var/lib/mysql
+    networks:
+      - backend
