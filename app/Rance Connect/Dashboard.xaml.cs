@@ -24,5 +24,10 @@ namespace Rance_Connect
         {
             InitializeComponent();
         }
+
+        private void Alerts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

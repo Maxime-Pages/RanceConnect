@@ -5,33 +5,70 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Rance_Connect"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="700
+      " d:DesignWidth="800"
       Title="Dashboard">
 
-    <Grid>
-        <Grid Margin="0,0,0,250">
-            <Grid Margin="30,43,0,0" Background="#FF43484E" Panel.ZIndex="19" Height="80" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100">
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Stock Total" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,10,0,0"/>
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,53,0,0" FontSize="14"/>
-            </Grid>
-            <Grid Width="100" Margin="190,43,0,0" Background="#FF43484E" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top">
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Bientôt Périmés" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,10,0,0" FontSize="12"/>
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,53,0,0" FontSize="14"/>
-            </Grid>
-            <Grid Width="100" Margin="347,43,0,0" Background="#FF43484E" HorizontalAlignment="Left" Height="80" VerticalAlignment="Top">
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Produits Périmés" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,10,0,0" FontSize="12"/>
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,53,0,0" FontSize="14"/>
-            </Grid>
-            <Grid Width="100" Margin="510,43,0,0" Background="#FF43484E" VerticalAlignment="Top" HorizontalAlignment="Left" Height="80">
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Seuils Atteints" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,10,0,0" FontSize="12"/>
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,53,0,0" FontSize="14"/>
-            </Grid>
-            <Grid Width="100" Margin="670,43,0,0" Background="#FF43484E" HorizontalAlignment="Left" VerticalAlignment="Top" Height="80">
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Nombre d'alertes" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,10,0,0" FontSize="12"/>
-                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="X" VerticalAlignment="Top" Height="18" Width="100" Foreground="White" TextAlignment="Center" Margin="0,53,0,0" FontSize="14"/>
-            </Grid>
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="159"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid VerticalAlignment="Top" Height="110">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Border Background="#FF43484E" Margin="10,0,10,0" CornerRadius="10">
+                <DockPanel>
+                    <TextBlock TextWrapping="Wrap" Text="Stock Total" Height="18" Foreground="White" TextAlignment="Center" Margin="0,30,0,0" Width="140" DockPanel.Dock="Top"/>
+                    <TextBlock TextWrapping="Wrap" Text="X" Foreground="White" TextAlignment="Center" FontSize="14" DockPanel.Dock="Top" Height="18"/>
+                </DockPanel>
+            </Border>
+            <Border Background="#FF43484E" Margin="10,0,10,0" Grid.Column="1" CornerRadius="10">
+                <DockPanel>
+                    <TextBlock TextWrapping="Wrap" Text="Bientôt Périmés" VerticalAlignment="Top" Height="18" Foreground="White" TextAlignment="Center" Margin="0,30,0,0" Width="140" DockPanel.Dock="Top"/>
+                    <TextBlock TextWrapping="Wrap" Text="X" Foreground="White" TextAlignment="Center" FontSize="14" DockPanel.Dock="Top" Height="18"/>
+                </DockPanel>
+            </Border>
+            <Border Background="#FF43484E" Margin="10,0,10,0" Grid.Column="2" CornerRadius="10">
+                <DockPanel>
+                    <TextBlock TextWrapping="Wrap" Text="Produits Périmés" VerticalAlignment="Top" Height="18" Foreground="White" TextAlignment="Center" Margin="0,30,0,0" Width="140" DockPanel.Dock="Top"/>
+                    <TextBlock TextWrapping="Wrap" Text="X" Foreground="White" TextAlignment="Center" FontSize="14" DockPanel.Dock="Top" Height="18"/>
+                </DockPanel>
+            </Border>
+            <Border Background="#FF43484E" Margin="10,0,10,0" Grid.Column="3" CornerRadius="10">
+                <DockPanel>
+                    <TextBlock TextWrapping="Wrap" Text="Seuils Atteints" VerticalAlignment="Top" Height="18" Foreground="White" TextAlignment="Center" Margin="0,30,0,0" Width="140" DockPanel.Dock="Top"/>
+                    <TextBlock TextWrapping="Wrap" Text="X" Foreground="White" TextAlignment="Center" FontSize="14" DockPanel.Dock="Top" Height="18"/>
+                </DockPanel>
+            </Border>
+            <Border Background="#FF43484E" Margin="10,0,10,0" Grid.Column="4" CornerRadius="10">
+                <DockPanel>
+                    <TextBlock TextWrapping="Wrap" Text="Nombre d'alertes" VerticalAlignment="Top" Height="18" Foreground="White" TextAlignment="Center" Margin="0,30,0,0" Width="140" DockPanel.Dock="Top"/>
+                    <TextBlock TextWrapping="Wrap" Text="X" Foreground="White" TextAlignment="Center" FontSize="14" DockPanel.Dock="Top" Height="18"/>
+                </DockPanel>
+            </Border>
         </Grid>
 
+        <DataGrid Grid.Row="5" Margin="10,0,10,30" x:Name="Alerts" Background="#FF43484E" SelectionChanged="Alerts_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Alertes" IsReadOnly="True" Width="*" />
+                <DataGridTemplateColumn IsReadOnly="True" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="goto" Content="S'y rendre"></Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Page>
