@@ -1,6 +1,6 @@
 namespace RanceConnect;
 
-[Name("QuotaRules")]
+[Chroma.Name("QuotaRules")]
 public class Quota : RanceRule
 {
     int minimum;
