@@ -9,12 +9,12 @@
       " d:DesignWidth="800"
       Title="Dashboard">
 
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="159"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid VerticalAlignment="Top" Height="110">
+        <Grid VerticalAlignment="Top" Height="110" Margin="0,20,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

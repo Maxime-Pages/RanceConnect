@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RanceConnect;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,22 +14,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace Rance_Connect
 {
     /// <summary>
-    /// Logique d'interaction pour Dashboard.xaml
+    /// Logique d'interaction pour Stocks.xaml
     /// </summary>
-    public partial class Dashboard : Page
+    public partial class Product : Page
     {
-        public Dashboard()
+        public Product()
         {
             InitializeComponent();
-        }
-
-        private void Alerts_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

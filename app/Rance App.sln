@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rance App", "Rance Connect\Rance App.csproj", "{B0F6C705-C085-4530-A410-9F4FA24E0D15}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RanceConnect", "..\common\RanceConnect.csproj", "{1712F5C6-8C30-4411-A203-840F672903FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B0F6C705-C085-4530-A410-9F4FA24E0D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0F6C705-C085-4530-A410-9F4FA24E0D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0F6C705-C085-4530-A410-9F4FA24E0D15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1712F5C6-8C30-4411-A203-840F672903FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1712F5C6-8C30-4411-A203-840F672903FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1712F5C6-8C30-4411-A203-840F672903FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1712F5C6-8C30-4411-A203-840F672903FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
