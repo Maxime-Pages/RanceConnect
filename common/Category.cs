@@ -1,6 +1,6 @@
 namespace RanceConnect;
 
-[Name("Categories")]
+[Chroma.Name("Categories")]
 public class Category
 {
     string name;
