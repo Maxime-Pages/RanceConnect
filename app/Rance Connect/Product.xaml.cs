@@ -27,8 +27,8 @@ namespace Rance_App
             InitializeComponent();
             EAN.Text = ean;
             products = new List<RanceConnect.Product>();
-            RanceConnect.Expiraton exp = new RanceConnect.Expiraton();
-            products.Add(new RanceConnect.Product("Example Product", "123456789", 9.99f, 100.0f, 50, DateTime.Now, DateTime.UtcNow, new Category[] {}, new RanceRule[] {}));
+            //TODO Add Product Connection
+
             Packs.ItemsSource = products;
         }
 

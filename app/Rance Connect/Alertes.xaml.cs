@@ -24,5 +24,11 @@ namespace Rance_App
         {
             InitializeComponent();
         }
+        private void GoTo_Click(object sender, RoutedEventArgs e)
+        {
+            string EAN = ((Button)sender).Tag.ToString();
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.Content = new Product(ean: EAN);
+        }
     }
 }

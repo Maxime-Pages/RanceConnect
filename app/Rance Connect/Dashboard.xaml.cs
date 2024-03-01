@@ -27,7 +27,7 @@ namespace Rance_App
         {
             InitializeComponent();
             ObservableCollection<Alert> alerts = new ObservableCollection<Alert>();
-            alerts.Add(new Alert("This is expiring in 2 days", 0, "AED53F4691"));
+            //TODO Get Alerts
             Alerts.ItemsSource = alerts;
         }
 
@@ -35,7 +35,6 @@ namespace Rance_App
         {
 
         }
-
         private void GoTo_Click(object sender, RoutedEventArgs e)
         {
             string EAN = ((Button)sender).Tag.ToString();
