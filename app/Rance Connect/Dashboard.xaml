@@ -1,13 +1,14 @@
-﻿<Page x:Class="Rance_Connect.Dashboard"
+﻿<Page x:Class="Rance_App.Dashboard"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Rance_Connect"
+      xmlns:local="clr-namespace:Rance_App"
       mc:Ignorable="d" 
       d:DesignHeight="700
       " d:DesignWidth="800"
       Title="Dashboard">
+
 
     <Grid>
         <Grid.RowDefinitions>
@@ -55,14 +56,22 @@
             </Border>
         </Grid>
 
-        <DataGrid Grid.Row="5" Margin="10,0,10,30" x:Name="Alerts" Background="#FF43484E" SelectionChanged="Alerts_SelectionChanged">
+        <DataGrid Grid.Row="5" Margin="10,0,10,30" x:Name="Alerts" Background="#FF43484E" SelectionChanged="Alerts_SelectionChanged" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Alertes" IsReadOnly="True" Width="*" />
+                <DataGridTemplateColumn Header="Name" IsReadOnly="True" CanUserResize="False" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn IsReadOnly="True" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Button x:Name="goto" Content="S'y rendre"></Button>
+                                <Button x:Name="goto" Tag="{Binding EAN}" Content="S'y rendre" Click="GoTo_Click"></Button>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

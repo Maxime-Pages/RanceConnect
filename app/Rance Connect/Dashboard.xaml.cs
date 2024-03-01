@@ -1,5 +1,7 @@
-﻿using System;
+﻿using RanceConnect;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 
-namespace Rance_Connect
+namespace Rance_App
 {
     /// <summary>
     /// Logique d'interaction pour Dashboard.xaml
@@ -24,11 +26,21 @@ namespace Rance_Connect
         public Dashboard()
         {
             InitializeComponent();
+            ObservableCollection<Alert> alerts = new ObservableCollection<Alert>();
+            alerts.Add(new Alert("This is expiring in 2 days", 0, "AED53F4691"));
+            Alerts.ItemsSource = alerts;
         }
 
         private void Alerts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void GoTo_Click(object sender, RoutedEventArgs e)
+        {
+            string EAN = ((Button)sender).Tag.ToString();
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.Content = new Product(ean: EAN);
         }
     }
 }

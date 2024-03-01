@@ -1,14 +1,97 @@
-﻿<Page x:Class="Rance_Connect.Product"
+﻿<Page x:Class="Rance_App.Product"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Rance_Connect"
-      mc:Ignorable="d" 
+      xmlns:local="clr-namespace:Rance_App"
+      mc:Ignorable="d"
       d:DesignHeight="700" d:DesignWidth="800"
       Title="Product">
 
     <Grid>
-        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="231"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Margin="10,10,10,41" Background="#FF43484E">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White"><Run Text="Nom Produit"/><Run Language="fr-fr" Text=" :"/></TextBlock>
+            <TextBox x:Name="Name" HorizontalAlignment="Left" Margin="84,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="288" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent"/>
+            <TextBlock HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Column="1"><Run Text="EAN :"/></TextBlock>
+            <TextBox x:Name="EAN" HorizontalAlignment="Left" Margin="64,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="291" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Column="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Row="1"><Run Text="Prix"/><Run Language="fr-fr" Text=" :"/></TextBlock>
+            <TextBox x:Name="Price" HorizontalAlignment="Left" Margin="40,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="332" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Row="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Row="2"><Run Text="Prix Promotionnel :"/></TextBlock>
+            <TextBox x:Name="SalesPrice" HorizontalAlignment="Left" Margin="116,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="264" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Row="2"/>
+            <TextBlock HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Column="1" Grid.Row="1"><Run Language="fr-fr" Text="Nombre de Lots en Stock :"/></TextBlock>
+            <TextBox x:Name="TotalQuantity" HorizontalAlignment="Left" Margin="175,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Column="1" Grid.Row="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Column="1" Grid.Row="2" Text="Alerte Stock Bas (en nbre de lot) :"/>
+            <TextBox x:Name="MinimalStock" HorizontalAlignment="Left" Margin="207,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="148" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Column="1" Grid.Row="2"/>
+            <TextBlock HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Column="1" Grid.Row="3" Text="Nombre de Lots à Atteindre (max) :"/>
+            <TextBox x:Name="StockToReach" HorizontalAlignment="Left" Margin="221,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="134" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Row="3" Grid.Column="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Row="3" Text="Alerte Avant Péremption (en jours) :"/>
+            <TextBox x:Name="ExpirationAlert" HorizontalAlignment="Left" Margin="203,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="169" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Row="3"/>
+        </Grid>
+
+
+        <DataGrid Grid.Row="1" Margin="10,0,10,30" x:Name="Packs" Background="#FF43484E" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="ID Lot" IsReadOnly="True" CanUserResize="False" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Quantité de produit" IsReadOnly="True" CanUserResize="False" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Quantity}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Date de mise en stock" IsReadOnly="True" CanUserResize="False" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding DateAdded}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Date de Péremption" IsReadOnly="True" CanUserResize="False" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding ExpirationDate}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn IsReadOnly="True" CanUserResize="False" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="Remove" Tag="{Binding ID}" Content="Retirer" Click="Remove_Click"></Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Page>

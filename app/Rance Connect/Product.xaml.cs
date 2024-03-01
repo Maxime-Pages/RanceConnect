@@ -14,16 +14,27 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Rance_Connect
+namespace Rance_App
 {
     /// <summary>
     /// Logique d'interaction pour Stocks.xaml
     /// </summary>
     public partial class Product : Page
     {
-        public Product()
+        private List<RanceConnect.Product> products;
+        public Product(String ean)
         {
             InitializeComponent();
+            EAN.Text = ean;
+            products = new List<RanceConnect.Product>();
+            RanceConnect.Expiraton exp = new RanceConnect.Expiraton();
+            products.Add(new RanceConnect.Product("Example Product", "123456789", 9.99f, 100.0f, 50, DateTime.Now, DateTime.UtcNow, new Category[] {}, new RanceRule[] {}));
+            Packs.ItemsSource = products;
+        }
+
+        private void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
