@@ -29,7 +29,7 @@ namespace Rance_App
 
         private void Stocks_Click(object sender, RoutedEventArgs e)
         {
-            Main.Content = new Stocks();
+            Main.Content = new Stock();
         }
 
         private void Historique_Click(object sender, RoutedEventArgs e)

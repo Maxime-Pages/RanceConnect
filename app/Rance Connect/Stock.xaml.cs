@@ -16,13 +16,20 @@ using System.Windows.Shapes;
 namespace Rance_App
 {
     /// <summary>
-    /// Logique d'interaction pour Stocks.xaml
+    /// Logique d'interaction pour Stock.xaml
     /// </summary>
-    public partial class Stocks : Page
+    public partial class Stock : Page
     {
-        public Stocks()
+        public Stock()
         {
             InitializeComponent();
+        }
+
+        private void GoTo_Click(object sender, RoutedEventArgs e)
+        {
+            string EAN = ((Button)sender).Tag.ToString();
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.Content = new Product(ean: EAN);
         }
     }
 }
