@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Rance_App"
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="500" MinWidth="900" Height="700" Width="940">
-    
+
     <Grid Background="#232628">
         <Menu Background="#FF2E333A" HorizontalAlignment="Left" Width="140">
             <MenuItem  Header="Dashboard" Click="Dashboard_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="80" Width="140" Margin="0,10,0,5" BorderBrush="{x:Null}" Foreground="#FFFFFF">

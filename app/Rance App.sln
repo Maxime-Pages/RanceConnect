@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rance App", "Rance Connect\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RanceConnect", "..\common\RanceConnect.csproj", "{1712F5C6-8C30-4411-A203-840F672903FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestObjects", "TestObjects\TestObjects.csproj", "{6BF3A051-0F12-482B-8265-84B436B5F359}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1712F5C6-8C30-4411-A203-840F672903FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1712F5C6-8C30-4411-A203-840F672903FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1712F5C6-8C30-4411-A203-840F672903FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BF3A051-0F12-482B-8265-84B436B5F359}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BF3A051-0F12-482B-8265-84B436B5F359}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BF3A051-0F12-482B-8265-84B436B5F359}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BF3A051-0F12-482B-8265-84B436B5F359}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
