@@ -26,8 +26,8 @@
 
             <Border Background="#FF43484E" Margin="10,0,10,0" CornerRadius="10">
                 <DockPanel>
-                    <TextBlock TextWrapping="Wrap" Text="Stock Total" Height="18" Foreground="White" TextAlignment="Center" Margin="0,30,0,0" Width="140" DockPanel.Dock="Top"/>
-                    <TextBlock TextWrapping="Wrap" Text="X" Foreground="White" TextAlignment="Center" FontSize="14" DockPanel.Dock="Top" Height="18"/>
+                    <TextBlock TextWrapping="Wrap" Text="Nombre Produits" Height="18" Foreground="White" TextAlignment="Center" Margin="0,30,0,0" Width="140" DockPanel.Dock="Top"/>
+                    <TextBlock x:Name="StockCount" TextWrapping="Wrap" Text="X" Foreground="White" TextAlignment="Center" FontSize="14" DockPanel.Dock="Top" Height="18"/>
                 </DockPanel>
             </Border>
             <Border Background="#FF43484E" Margin="10,0,10,0" Grid.Column="1" CornerRadius="10">
@@ -51,7 +51,7 @@
             <Border Background="#FF43484E" Margin="10,0,10,0" Grid.Column="4" CornerRadius="10">
                 <DockPanel>
                     <TextBlock TextWrapping="Wrap" Text="Nombre d'alertes" VerticalAlignment="Top" Height="18" Foreground="White" TextAlignment="Center" Margin="0,30,0,0" Width="140" DockPanel.Dock="Top"/>
-                    <TextBlock TextWrapping="Wrap" Text="X" Foreground="White" TextAlignment="Center" FontSize="14" DockPanel.Dock="Top" Height="18"/>
+                    <TextBlock x:Name="AlertsCount" TextWrapping="Wrap" Text="X" Foreground="White" TextAlignment="Center" FontSize="14" DockPanel.Dock="Top" Height="18"/>
                 </DockPanel>
             </Border>
         </Grid>

@@ -15,7 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TestObjects;
 
 
 namespace Rance_App
@@ -25,8 +24,6 @@ namespace Rance_App
     /// </summary>
     public partial class Stock : Page
     {
-        TestStock testStock = new TestStock();
-        TestCategory testCategory = new TestCategory();
         private List<string> selectedCategories = new List<string>();
         private string searchBar = "";
         private float minPrice;
@@ -36,10 +33,9 @@ namespace Rance_App
         public Stock()
         {
             InitializeComponent();
-            testStock.AddProduct("vrvrvr");
-            Products = testStock.QueryStock();
+            Products = Interactions.QueryStock();
             Stocks.ItemsSource = Products;
-            foreach (Category category in testCategory.Categories) 
+            foreach (Category category in Interactions.QueryCategories()) 
             {
                 AddFilter(Categories, category.Name);
             }
@@ -151,7 +147,7 @@ namespace Rance_App
         /*Makes The "Add Product" popup Appear*/
         public void AddProduct_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            AddProductFrame.Content = new AddProduct();
         }
 
         /*Go to Selected Product Page passing EAN identifier*/

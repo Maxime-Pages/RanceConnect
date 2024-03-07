@@ -12,11 +12,11 @@
 
         <DataGrid Grid.Row="2" Margin="10,0,10,30" x:Name="Events" Background="#FF43484E" AutoGenerateColumns="False">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Type d'événement" IsReadOnly="True" CanUserResize="False" Width="120">
+                <DataGridTemplateColumn Header="Date" IsReadOnly="True" CanUserResize="False" Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding EventName}"/>
+                                <TextBlock Text="{Binding DateAdded}"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -25,7 +25,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding EventDescription}"/>
+                                <TextBlock Text="{Binding Name}"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

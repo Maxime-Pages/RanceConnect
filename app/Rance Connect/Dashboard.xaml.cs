@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RanceConnect;
 
 
 namespace Rance_App
@@ -26,9 +27,10 @@ namespace Rance_App
         public Dashboard()
         {
             InitializeComponent();
-            ObservableCollection<Alert> alerts = new ObservableCollection<Alert>();
-            //TODO Get Alerts
+            List<Alert> alerts = Interactions.QueryRecentAlerts();
             Alerts.ItemsSource = alerts;
+            StockCount.Text = Interactions.QueryStockCount().ToString();
+            AlertsCount.Text = Interactions.QueryAlertsCount().ToString();
         }
 
         private void Alerts_SelectionChanged(object sender, SelectionChangedEventArgs e)

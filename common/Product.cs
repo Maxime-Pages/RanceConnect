@@ -5,7 +5,6 @@ namespace RanceConnect;
 [Chroma.Name("Products")]
 public class Product
 {
-
     string name;
 
     string ean;
@@ -46,5 +45,4 @@ public class Product
         Categories = categories;
         Rules = rules;
     }
-
 }

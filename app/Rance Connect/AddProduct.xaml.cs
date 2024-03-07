@@ -12,20 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using RanceConnect;
 
 namespace Rance_App
 {
     /// <summary>
-    /// Logique d'interaction pour Historique.xaml
+    /// Logique d'interaction pour AddProduct.xaml
     /// </summary>
-    public partial class Historique : Page
+    public partial class AddProduct : Page
     {
-        public Historique()
+        public AddProduct()
         {
             InitializeComponent();
-            List<Log> logs = Interactions.QueryLogs();
-            Events.ItemsSource = logs;
         }
     }
 }

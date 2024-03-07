@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RanceConnect;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace Rance_App
         public Alertes()
         {
             InitializeComponent();
+            List<Alert> alerts = Interactions.QueryAlerts();
+            Alerts.ItemsSource = alerts;
         }
         private void GoTo_Click(object sender, RoutedEventArgs e)
         {

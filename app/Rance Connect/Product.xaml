@@ -11,46 +11,56 @@
     <Grid>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="231"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="170"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Margin="10,10,10,41" Background="#FF43484E">
+        <Grid Margin="10,10,10,0" Background="#FF43484E">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Button Content="Supprimer le produit" Width="150" Margin="30,0,0,0" HorizontalAlignment="Left" Background="#FFC71818" Foreground="White"/>
+                <TextBox x:Name="Name" Text="Product Name" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="300" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" FontSize="20" TextAlignment="Center"/>
+                <Button Content="TODO: CATEGORIES " Width="150" Margin="0,0,60,0" HorizontalAlignment="Right"/>
+                <Button Content="X" Click="Remove_Click" Width="30" Margin="0,0,0,0" HorizontalAlignment="Right" Background="{x:Null}" Foreground="#FF7D0000" BorderBrush="#FF373737"/>
+            </Grid>
+            <TextBox Grid.Row="1" x:Name="EAN" Text="Product EAN" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="600" Background="Transparent" Foreground="#FFDADADA" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Column="1" TextAlignment="Center"/>
+
+        </Grid>
+        <Grid Grid.Row="1" Margin="10,0,10,40" Background="#FF43484E">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="122*"/>
+                <ColumnDefinition Width="73*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White"><Run Text="Nom Produit"/><Run Language="fr-fr" Text=" :"/></TextBlock>
-            <TextBox x:Name="Name" HorizontalAlignment="Left" Margin="84,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="288" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent"/>
-            <TextBlock HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Column="1"><Run Text="EAN :"/></TextBlock>
-            <TextBox x:Name="EAN" HorizontalAlignment="Left" Margin="64,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="291" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Column="1"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Row="1"><Run Text="Prix"/><Run Language="fr-fr" Text=" :"/></TextBlock>
-            <TextBox x:Name="Price" HorizontalAlignment="Left" Margin="40,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="332" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Row="1"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Row="2"><Run Text="Prix Promotionnel :"/></TextBlock>
-            <TextBox x:Name="SalesPrice" HorizontalAlignment="Left" Margin="116,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="264" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Row="2"/>
-            <TextBlock HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Column="1" Grid.Row="1"><Run Language="fr-fr" Text="Nombre de Lots en Stock :"/></TextBlock>
-            <TextBox x:Name="TotalQuantity" HorizontalAlignment="Left" Margin="175,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="180" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Column="1" Grid.Row="1"/>
-            <TextBlock HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Column="1" Grid.Row="2" Text="Alerte Stock Bas (en nbre de lot) :"/>
-            <TextBox x:Name="MinimalStock" HorizontalAlignment="Left" Margin="207,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="148" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Column="1" Grid.Row="2"/>
-            <TextBlock HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Column="1" Grid.Row="3" Text="Nombre de Lots à Atteindre (max) :"/>
-            <TextBox x:Name="StockToReach" HorizontalAlignment="Left" Margin="221,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="134" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Row="3" Grid.Column="1"/>
-            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Row="3" Text="Alerte Avant Péremption (en jours) :"/>
-            <TextBox x:Name="ExpirationAlert" HorizontalAlignment="Left" Margin="203,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="169" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Row="3"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Height="16" Width="30"><Run Text="Prix"/><Run Language="fr-fr" Text=" :"/></TextBlock>
+            <TextBox x:Name="Price" HorizontalAlignment="Left" Margin="45,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="327" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Height="18"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Row="1" Height="16" Width="101"><Run Text="Prix Promotionnel :"/></TextBlock>
+            <TextBox x:Name="SalesPrice" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="256" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Row="1" Height="18"/>
+            <TextBlock HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Column="1" Height="16" Width="140"><Run Language="fr-fr" Text="Nombre de Lots en Stock :"/></TextBlock>
+            <TextBox x:Name="TotalQuantity" HorizontalAlignment="Left" Margin="175,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="113" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Column="1" Height="18"/>
+            <TextBlock HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Column="1" Grid.Row="1" Text="Alerte Stock Bas (en nbre de lot) :" Height="16" Width="176"/>
+            <TextBox x:Name="MinimalStock" HorizontalAlignment="Left" Margin="211,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="77" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Column="1" Grid.Row="1" Height="18"/>
+            <TextBlock HorizontalAlignment="Left" Margin="30,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Column="1" Grid.Row="2" Text="Nombre de Lots à Atteindre (max) :" Height="16" Width="188"/>
+            <TextBox x:Name="StockToReach" HorizontalAlignment="Left" Margin="223,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="65" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Row="2" Grid.Column="1" Height="18"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="White" Grid.Row="2" Text="Alerte Avant Péremption (en jours) :" Height="16" Width="193"/>
+            <TextBox x:Name="ExpirationAlert" HorizontalAlignment="Left" Margin="208,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="164" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Row="2" Height="18"/>
         </Grid>
 
 
-        <DataGrid Grid.Row="1" Margin="10,0,10,30" x:Name="Packs" Background="#FF43484E" AutoGenerateColumns="False">
+        <DataGrid Grid.Row="2" Margin="10,0,10,30" x:Name="Packs" Background="#FF43484E" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="ID Lot" IsReadOnly="True" CanUserResize="False" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding ID}"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
