@@ -45,5 +45,13 @@ namespace Rance_App
             NavigationService ns = NavigationService.GetNavigationService(this);
             ns.GoBack();
         }
+        private void CategoriesButton_Click(object sender, RoutedEventArgs e)
+        {
+            CategoriesPopup.Visibility = Visibility.Visible;
+        }
+        private void RemoveCategory_Click(object sender, RoutedEventArgs e)
+        {
+            CategoriesPopup.Visibility = Visibility.Collapsed;
+        }
     }
 }
