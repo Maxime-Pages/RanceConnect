@@ -87,6 +87,12 @@ namespace TestObjects
             return Stock.Count;
         }
 
+        public void AddProduct(Product p)
+        {
+            AddLog("user", 4, "Product", p.EAN);
+            Stock.Add(p);
+        }
+
         public void AddProduct(string name)
         {
             Product p = CreateProduct(name);
@@ -109,7 +115,7 @@ namespace TestObjects
             Random random = new Random();
             DateTime expirationDate = DateTime.Now.AddDays(random.Next(30, 365)); // Generate a random expiration date between 30 and 365 days from now
             DateTime dateAdded = DateTime.Now; // Set the current date as the date added
-            Stock.Add(new Product("tst product 1", "EQCEPCAPCcf", (float)99.99, (float)79.99, 55, expirationDate, dateAdded, null, null));
+            Stock.Add(new Product("tst product 1", "EQCEPCAPCcf", (float)99.99, (float)79.99, 55, dateAdded, null, null));
             Provisions.Add(new Provision("52", "EQCEPCAPCcf", 8, expirationDate, dateAdded));
             Provisions.Add(new Provision("56", "EQCEPCAPCcf", 18, expirationDate, dateAdded));
             Provisions.Add(new Provision("57", "EQCEPCAPCcf", 2, expirationDate, dateAdded));
@@ -148,7 +154,6 @@ namespace TestObjects
             float price = GenerateRandomPrice(random);
             float salesAmount = 0f; // Set a sample sales amount
             int quantity = 100; // Set a sample quantity
-            DateTime expirationDate = DateTime.Now.AddDays(random.Next(30, 365)); // Generate a random expiration date between 30 and 365 days from now
             DateTime dateAdded = DateTime.Now; // Set the current date as the date added
 
             Category category = Categories[random.Next(0, 4)];
@@ -157,7 +162,7 @@ namespace TestObjects
             categories[0] = category;
             RanceRule[] rules = new RanceRule[0]; // Set an empty array for rules
 
-            return new Product(name, ean, price, salesAmount, quantity, expirationDate, dateAdded, categories, rules);
+            return new Product(name, ean, price, salesAmount, quantity, dateAdded, categories, rules);
         }
 
         // Generate a random EAN for the product

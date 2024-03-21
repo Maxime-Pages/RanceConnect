@@ -56,5 +56,11 @@ namespace Rance_App
         {
             return Stocks.QueryPrioritaryANDRecentAlerts();
         }
+
+        public static void AddProduct(string name, string ean, float price, float salesAmount, DateTime dateAdded, int lowStock, int MaxStock)
+        {
+            //TODO : Add Rules Support
+            RanceConnect.Product p = new RanceConnect.Product(name, ean, price, salesAmount, 0, dateAdded, null, null);
+        }
     }
 }

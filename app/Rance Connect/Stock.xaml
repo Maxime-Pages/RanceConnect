@@ -13,11 +13,9 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis2"/>
     </Page.Resources>
     <Grid>
-        <Frame x:Name="AddProductFrame" Panel.ZIndex="2" Height="450" Width="600"/>
-
         <Grid>
             <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="301*"/>
         </Grid.RowDefinitions>
         <Grid VerticalAlignment="Center">
@@ -37,11 +35,12 @@
                 <TextBox x:Name="SearchBar" Style="{StaticResource textBoxSearch}" Height="25" TextChanged="FilterUpdate"/>
             </Grid>
             <Grid  Margin="10,10,0,0" Grid.Column="1" VerticalAlignment="Top">
-                <StackPanel x:Name="Categories" Height="25" Background="#FF43484E" MinHeight="25" MaxHeight="25" VerticalAlignment="Top" Margin="0,0,0,-25">
-                    <StackPanel Height="25">
+                <StackPanel Background="#FF43484E" MinHeight="25" VerticalAlignment="Top" Margin="0,0,0,-25">
                         <Button Content="Filtrer par catégorie" Tag="" Click="DropMenu_Click" Height="25" Background="{x:Null}" Foreground="White"/>
+                        <ScrollViewer Height="0" VerticalScrollBarVisibility="Auto" VerticalAlignment="Top">
+                            <StackPanel x:Name="Categories" VerticalAlignment="Top"/>
+                        </ScrollViewer>
                     </StackPanel>
-                </StackPanel>
             </Grid>
             <Grid Margin="10,0,80,0" VerticalAlignment="Top" Grid.Column="2" Width="75">
                 <TextBlock Visibility="{Binding ElementName=MinPrice,Path=Text.IsEmpty,Converter={StaticResource BoolToVis1}}" Panel.ZIndex="1" IsHitTestVisible="False" Foreground="#FFFFFF" HorizontalAlignment="Center" Text="Prix Min" Width="60" VerticalAlignment="Center"/>

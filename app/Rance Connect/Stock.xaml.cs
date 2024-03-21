@@ -47,11 +47,11 @@ namespace Rance_App
         {
             string content;
             string name;
-            try
+            if (sender is Button)
             {
                 content = (sender as Button).Content.ToString();
                 name = (((sender as Button).Parent as StackPanel).Parent as StackPanel).Name;
-            } catch (Exception)
+            } else
             {
                 content = (sender as TextBox).Text;
                 name = (sender as TextBox).Name;
@@ -99,24 +99,24 @@ namespace Rance_App
             foreach (RanceConnect.Product p in Products)
             {
 
-                int countcategories = p.Categories.Length;
-                foreach (Category c in p.Categories)
+                int countcategories = p.Categories != null ? p.Categories.Length : 0;
+
+                if (countcategories != 0 && selectedCategories.Count !=0)
                 {
-                    if (selectedCategories.Contains(c.Name))
-                    {
-                        countcategories--;
-                    }
+                    foreach (Category c in p.Categories)
+                        if (selectedCategories.Contains(c.Name))
+                            countcategories--;
+
+                    if (countcategories > 0)
+                        continue;
                 }
-                if (countcategories > 0)
-                    continue;
 
                 if (minPrice!=0 && minPrice > p.Price || maxPrice!=0 && p.Price > maxPrice)
-                {
                     continue;
-                }
 
-                if (searchBar == "" || !p.Name.Contains(searchBar) && !p.EAN.Contains(searchBar))
-                    continue;
+                if (searchBar != "")
+                    if (!p.Name.ToLower().Contains(searchBar.ToLower()) && !p.EAN.ToLower().Contains(searchBar.ToLower()))
+                        continue;
 
 
 
@@ -131,15 +131,15 @@ namespace Rance_App
         private void DropMenu_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
-            StackPanel parent = (btn.Parent as StackPanel).Parent as StackPanel;
+            StackPanel parent = btn.Parent as StackPanel;
             string dropped = btn.Tag.ToString();
             if (dropped == "")
             {
-                parent.Height = parent.MaxHeight;
+                parent.Children[1].SetValue(HeightProperty, 100.0);
                 btn.Tag = "dropped";
             } else
             {
-                parent.Height = 25;
+                parent.Children[1].SetValue(HeightProperty, 0.0);
                 btn.Tag = "";
             }
         }
@@ -147,7 +147,9 @@ namespace Rance_App
         /*Makes The "Add Product" popup Appear*/
         public void AddProduct_Click(object sender, RoutedEventArgs e)
         {
-            AddProductFrame.Content = new AddProduct();
+            string EAN = (sender as Button).Tag.ToString();
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            ns.Content = new AddProduct();
         }
 
         /*Go to Selected Product Page passing EAN identifier*/
