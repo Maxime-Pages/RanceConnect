@@ -15,7 +15,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid>
-                <TextBox x:Name="CategoryTitle" Text="Catégories" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="300" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" FontSize="20" TextAlignment="Center"/>
+                <TextBlock x:Name="CategoryTitle" Text="Catégories" HorizontalAlignment="Center" Margin="0, 0, 0, 0" TextWrapping="Wrap" VerticalAlignment="Center" Width="300" Background="Transparent" Foreground="White" TextAlignment="Center" FontSize="20"/>
                 <Button Content="X" Click="RemoveCategory_Click" Width="30" Margin="0,0,0,0" HorizontalAlignment="Right" Background="{x:Null}" Foreground="#FF7D0000" BorderBrush="#FF373737"/>
             </Grid>
         </Grid>
