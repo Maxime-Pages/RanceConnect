@@ -1,10 +1,11 @@
 SERVER_IMAGE = "ranceserver"
 
-.PHONY all: server client
 
-.PHONY server:
+all :: server client
+
+server ::
 	docker build ./ -t $(SERVER_IMAGE)
 	doker run -d -p 11000:11000 $(SERVER_IMAGE)
 
-.PHONY client:
+client ::
 	echo "hello :D"
