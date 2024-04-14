@@ -9,7 +9,7 @@
       Title="Product">
 
     <Grid>
-        <Grid x:Name="CategoriesPopup" Visibility="Visible" Height="350" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Background="DarkGray" Panel.ZIndex="1">
+        <Grid x:Name="CategoriesPopup" Visibility="Collapsed" Height="350" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Background="DarkGray" Panel.ZIndex="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition/>
@@ -25,16 +25,16 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Nom}" />
+                                        <TextBlock Text="{Binding Name}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Oui/non" IsReadOnly="True" CanUserResize="False" Width="150">
+                        <DataGridTemplateColumn Header="Oui/non" IsReadOnly="False" CanUserResize="False" Width="150">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox />
+                                        <CheckBox Tag="{Binding IDCategory}" Checked="CheckBox_Checked" IsChecked="{Binding TCheck}" Unchecked="CheckBox_Checked"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

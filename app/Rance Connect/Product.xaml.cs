@@ -1,4 +1,5 @@
-﻿using RanceConnect;
+﻿using Microsoft.VisualBasic;
+using RanceConnect;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +23,16 @@ namespace Rance_App
     public partial class Product : Page
     {
         private List<Provision> products;
+        private RanceConnect.Product product;
+        private List<Category> categories;
+
         public Product(string ean)
         {
             InitializeComponent();
             EAN.Text = ean;
             products = Interactions.QueryProvisionsOfProduct(ean);
-            RanceConnect.Product product = Interactions.QueryProduct(ean);
+            product = Interactions.QueryProduct(ean);
+            categories = Interactions.QueryCategories();
             Name.Text = product.Name;
             Price.Text = product.Price.ToString();
             SalesPrice.Text = product.Salesamount.ToString();
@@ -47,11 +52,50 @@ namespace Rance_App
         }
         private void CategoriesButton_Click(object sender, RoutedEventArgs e)
         {
+            List<mutableTuple> g = new List<mutableTuple>(); // <|°_°|>
+            int index = 0;
+            foreach (Category category in categories)
+            {
+                if (product.Categories != null && product.Categories.Contains(category))
+                {
+                    g.Add(new mutableTuple(index, true, category.Name));
+                } else
+                {
+                    g.Add(new mutableTuple(index, false, category.Name));
+                }
+                index++;
+            }
+            categoriesGrid.ItemsSource = g;
             CategoriesPopup.Visibility = Visibility.Visible;
         }
         private void RemoveCategory_Click(object sender, RoutedEventArgs e)
         {
             CategoriesPopup.Visibility = Visibility.Collapsed;
         }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox chk = (CheckBox)sender;
+            List<Category> tmp = product.Categories.ToList();
+            if(chk.IsChecked.Value && tmp.Contains(categories[(int)chk.Tag]))
+            {
+                return;
+            }
+            if(chk.IsChecked.Value)
+            {
+                tmp.Add(categories[(int)chk.Tag]);
+            } else
+            {
+                tmp.Remove(categories[(int)chk.Tag]);
+            }
+            product.Categories = tmp.ToArray();
+        }
+    }
+
+    internal class mutableTuple (int ct, bool b, string name)
+    {
+        public int IDCategory { get; set; } = ct;
+        public bool TCheck { get; set; } = b;
+        public string Name { get; set; } = name;
     }
 }
