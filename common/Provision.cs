@@ -16,7 +16,6 @@ namespace RanceConnect
         DateTime dateAdded;
 
 
-        [Chroma.Primary]
         public string ID { get => id; set => id = value; }
         public string EAN { get => ean; set => ean = value; }
         public int Quantity { get => quantity; set => quantity = value; }
