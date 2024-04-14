@@ -9,7 +9,7 @@
       Title="Product">
 
     <Grid>
-        <Grid x:Name="CategoriesPopup" Visibility="Collapsed" Height="350" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Background="DarkGray" Panel.ZIndex="1">
+        <Grid x:Name="CategoriesPopup" Visibility="Visible" Height="350" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Background="DarkGray" Panel.ZIndex="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition/>
@@ -17,6 +17,30 @@
             <Grid>
                 <TextBlock x:Name="CategoryTitle" Text="Catégories" HorizontalAlignment="Center" Margin="0, 0, 0, 0" TextWrapping="Wrap" VerticalAlignment="Center" Width="300" Background="Transparent" Foreground="White" TextAlignment="Center" FontSize="20"/>
                 <Button Content="X" Click="RemoveCategory_Click" Width="30" Margin="0,0,0,0" HorizontalAlignment="Right" Background="{x:Null}" Foreground="#FF7D0000" BorderBrush="#FF373737"/>
+            </Grid>
+            <Grid Grid.Row="1">
+                <DataGrid Grid.Row="1" x:Name="categoriesGrid" Background="Transparent" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Nom" IsReadOnly="True" CanUserResize="False" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Nom}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Oui/non" IsReadOnly="True" CanUserResize="False" Width="150">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </Grid>
         
