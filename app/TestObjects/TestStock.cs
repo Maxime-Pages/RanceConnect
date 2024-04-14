@@ -93,6 +93,15 @@ namespace TestObjects
             Stock.Add(p);
         }
 
+        public bool UpdateProduct(Product p)
+        {
+            Stock.Where(x => x.EAN == p.EAN)
+                .ToList()
+                .ForEach(x => x = p);
+
+            return true;
+        }
+
         public void AddProduct(string name)
         {
             Product p = CreateProduct(name);

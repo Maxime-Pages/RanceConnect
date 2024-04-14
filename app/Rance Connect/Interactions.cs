@@ -62,5 +62,10 @@ namespace Rance_App
             //TODO : Add Rules Support
             RanceConnect.Product p = new RanceConnect.Product(name, ean, price, salesAmount, 0, dateAdded, null, null);
         }
+
+        internal static void UpdateProduct(RanceConnect.Product product)
+        {
+            Stocks.UpdateProduct(product);
+        }
     }
 }

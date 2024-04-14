@@ -76,7 +76,7 @@ namespace Rance_App
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox chk = (CheckBox)sender;
-            List<Category> tmp = product.Categories.ToList();
+            List<Category> tmp = product.Categories == null ? new List<Category>() : product.Categories.ToList();
             if(chk.IsChecked.Value && tmp.Contains(categories[(int)chk.Tag]))
             {
                 return;
@@ -89,6 +89,11 @@ namespace Rance_App
                 tmp.Remove(categories[(int)chk.Tag]);
             }
             product.Categories = tmp.ToArray();
+        }
+
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Interactions.UpdateProduct(product);
         }
     }
 

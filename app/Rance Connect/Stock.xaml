@@ -11,6 +11,7 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis1"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis2"/>
+        <local:CategoriesConverter x:Key="CategoriesConverter"/>
     </Page.Resources>
     <Grid>
         <Grid>
@@ -88,26 +89,14 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Categories" IsReadOnly="True" CanUserResize="False" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <DataGrid ItemsSource="{Binding Categories}" AutoGenerateColumns="False" CanUserResizeColumns="False"
-                                GridLinesVisibility="None" BorderBrush="Transparent" CanUserSortColumns="False" 
-                                Background="Transparent" BorderThickness="0" Padding="0" Margin="0">
-                                <DataGrid.CellStyle>
-                                    <Style TargetType="DataGridCell">
-                                        <Setter Property="BorderThickness" Value="0" />
-                                        <Setter Property="TextBlock.TextDecorations" Value="None" />
-                                    </Style>
-                                </DataGrid.CellStyle>
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn IsReadOnly="True"  Width="*" Binding="{Binding Name}" />
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn IsReadOnly="True" Width="80">
+                    <DataGridTemplateColumn Header="Categories" IsReadOnly="True" CanUserResize="False" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Categories, Converter={StaticResource CategoriesConverter}}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn IsReadOnly="True" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Margin="10, 10, 10, 10">

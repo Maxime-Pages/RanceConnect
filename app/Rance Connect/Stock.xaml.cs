@@ -35,11 +35,10 @@ namespace Rance_App
             InitializeComponent();
             Products = Interactions.QueryStock();
             Stocks.ItemsSource = Products;
-            foreach (Category category in Interactions.QueryCategories()) 
+            foreach (Category category in Interactions.QueryCategories())
             {
                 AddFilter(Categories, category.Name);
             }
-
         }
 
         /*Update any of the added Filters to change the product list*/
@@ -158,6 +157,23 @@ namespace Rance_App
             string EAN = (sender as Button).Tag.ToString();
             NavigationService ns = NavigationService.GetNavigationService(this);
             ns.Content = new Product(ean: EAN);
+        }
+    }
+    public class CategoriesConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value != null && value is IEnumerable<Category> categories)
+            {
+                return string.Join(", ", categories.Select(c => c.Name));
+            }
+
+            return string.Empty;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotSupportedException();
         }
     }
 }
