@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace RanceConnect
 {
-    [Chroma.Name("Logs")]
     public class Log
     {
         private string name;
