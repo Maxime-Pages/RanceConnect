@@ -1,4 +1,3 @@
-using Chroma;
 
 namespace RanceConnect;
 
@@ -21,7 +20,6 @@ public class Product
     RanceRule[] rules;
 
     public string Name { get => name; set => name = value; }
-    [Chroma.Primary]
     public string EAN { get => ean; set => ean = value; }
     public float Price { get => price; set => price = value; }
     public float Salesamount { get => salesAmount; set => salesAmount = value; }
