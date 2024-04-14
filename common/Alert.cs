@@ -1,6 +1,5 @@
 ﻿namespace RanceConnect;
 
-[Chroma.Name("Alerts")]
 public class Alert
 {
     private string name;
