@@ -10,19 +10,20 @@
       Unloaded="Page_Unloaded">
 
     <Grid>
-        <Grid x:Name="CategoriesPopup" Visibility="Collapsed" Height="350" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center" Background="DarkGray" Panel.ZIndex="1">
+        <Grid x:Name="CategoriesPopup" Visibility="Collapsed" Height="350" Width="400" HorizontalAlignment="Center" VerticalAlignment="Center" Background="DarkGray" Panel.ZIndex="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition/>
+                <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
             <Grid>
                 <TextBlock x:Name="CategoryTitle" Text="Catégories" HorizontalAlignment="Center" Margin="0, 0, 0, 0" TextWrapping="Wrap" VerticalAlignment="Center" Width="300" Background="Transparent" Foreground="White" TextAlignment="Center" FontSize="20"/>
-                <Button Content="X" Click="RemoveCategory_Click" Width="30" Margin="0,0,0,0" HorizontalAlignment="Right" Background="{x:Null}" Foreground="#FF7D0000" BorderBrush="#FF373737"/>
+                <Button Content="X" Click="RemoveCategoryWindow_Click" Width="30" Margin="0,0,0,0" HorizontalAlignment="Right" Background="{x:Null}" Foreground="#FF7D0000" BorderBrush="#FF373737"/>
             </Grid>
             <Grid Grid.Row="1">
                 <DataGrid Grid.Row="1" x:Name="categoriesGrid" Background="Transparent" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Nom" IsReadOnly="True" CanUserResize="False" Width="100">
+                        <DataGridTemplateColumn Header="Nom" IsReadOnly="True" CanUserResize="False" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -31,11 +32,20 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTemplateColumn Header="Oui/non" IsReadOnly="False" CanUserResize="False" Width="150">
+                        <DataGridTemplateColumn Header="Oui/non" IsReadOnly="False" CanUserResize="False" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <CheckBox Tag="{Binding Name}" Checked="CheckBox_Checked" IsChecked="{Binding TCheck}" Unchecked="CheckBox_Checked"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Supprimer" IsReadOnly="False" CanUserResize="False" Width="100">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox Tag="{Binding IDCategory}" Checked="CheckBox_Checked" IsChecked="{Binding TCheck}" Unchecked="CheckBox_Checked"/>
+                                        <Button Content="Supprimer" Tag="{Binding Name}" Click="RemoveCategory_Click" Grid.Column="1" Width="100" HorizontalAlignment="Center" Background="#FFFF6868" Foreground="#FF131313" BorderBrush="{x:Null}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -43,12 +53,23 @@
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="NewCategText" Text="Nom nouvelle catégorie" Grid.Column="1" FontSize="12" Width="150" VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+                <Button Content="Ajouter" Click="AddCategory_Click" Width="50" Grid.Column="1" HorizontalAlignment="Right" Background="#FF8DFF83" Foreground="#FF131313" BorderBrush="{x:Null}"/>
+            </Grid>
         </Grid>
         
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="170"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid Margin="10,10,10,0" Background="#FF43484E">
@@ -65,7 +86,7 @@
                 <TextBox Grid.Row="1" x:Name="EAN" Text="Product EAN" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="600" Background="Transparent" Foreground="#FFDADADA" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Column="1" TextAlignment="Center"/>
 
             </Grid>
-            <Grid Grid.Row="1" Margin="10,0,10,40" Background="#FF43484E">
+            <Grid Grid.Row="1" Margin="10,0,10,10" Background="#FF43484E">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="122*"/>
                     <ColumnDefinition Width="73*"/>
@@ -89,8 +110,20 @@
                 <TextBox x:Name="ExpirationAlert" HorizontalAlignment="Left" Margin="208,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="164" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Row="2" Height="18"/>
             </Grid>
 
-
-            <DataGrid Grid.Row="2" Margin="10,0,10,30" x:Name="Packs" Background="#FF43484E" AutoGenerateColumns="False">
+            <Grid Grid.Row="2" Background="LightGreen">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="210"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Quantité :" Margin="10, 0, 0, 0" HorizontalAlignment="Left"/>
+                <TextBox x:Name="ProvisionQt"  Text="0" HorizontalAlignment="Right" Width="50"/>
+                <TextBlock Width="100" Grid.Column="1" Text="Date Péremption :" Margin="10, 0, 0, 0" HorizontalAlignment="Left"/>
+                <TextBox x:Name="ProvisionDate" Width="100" Grid.Column="1" HorizontalAlignment="Right"/>
+                <Button Grid.Column="2" Background="Green" Content="Ajouter Provision" Click="Provision_Click" HorizontalAlignment="Left" Padding="10,0,10,0" Margin="5,0,0,0" Width="120"/>
+            </Grid>
+            
+            <DataGrid Grid.Row="3" Margin="10,0,10,30" x:Name="Packs" Background="#FF43484E" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="ID Lot" IsReadOnly="True" CanUserResize="False" Width="*">
                         <DataGridTemplateColumn.CellTemplate>

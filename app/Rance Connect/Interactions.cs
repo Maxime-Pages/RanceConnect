@@ -67,5 +67,20 @@ namespace Rance_App
         {
             Stocks.UpdateProduct(product);
         }
+
+        internal static void AddCategory(Category category)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void RemoveCategory(Category category)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void AddProvisionOfProduct(Provision provision)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

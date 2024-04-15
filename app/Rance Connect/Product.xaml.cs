@@ -2,6 +2,7 @@
 using RanceConnect;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,7 @@ namespace Rance_App
         private List<Provision> products;
         private RanceConnect.Product product;
         private List<Category> categories;
+        private ObservableCollection<mutableTuple> categoriesObserved;
 
         public Product(string ean)
         {
@@ -52,41 +54,64 @@ namespace Rance_App
         }
         private void CategoriesButton_Click(object sender, RoutedEventArgs e)
         {
-            List<mutableTuple> g = new List<mutableTuple>(); // <|°_°|>
-            int index = 0;
+            categoriesObserved = new ObservableCollection<mutableTuple>(); // <|°_°|>
             foreach (Category category in categories)
             {
                 if (product.Categories != null && product.Categories.Contains(category))
                 {
-                    g.Add(new mutableTuple(index, true, category.Name));
+                    categoriesObserved.Add(new mutableTuple(true, category.Name));
                 } else
                 {
-                    g.Add(new mutableTuple(index, false, category.Name));
+                    categoriesObserved.Add(new mutableTuple(false, category.Name));
                 }
-                index++;
             }
-            categoriesGrid.ItemsSource = g;
+            categoriesGrid.ItemsSource = categoriesObserved;
             CategoriesPopup.Visibility = Visibility.Visible;
         }
-        private void RemoveCategory_Click(object sender, RoutedEventArgs e)
+
+        private void RemoveCategoryWindow_Click(object sender, RoutedEventArgs e)
         {
             CategoriesPopup.Visibility = Visibility.Collapsed;
+        }
+
+        private void AddCategory_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (!categories.Exists(x => x.Name == NewCategText.Text))
+            {
+                Category categ = new Category(NewCategText.Text, []);
+                Interactions.AddCategory(categ);
+                categories.Add(categ);
+                categoriesObserved.Add(new mutableTuple(false, NewCategText.Text)); 
+            }
+        }
+
+        private void RemoveCategory_Click(object sender, RoutedEventArgs e)
+        {
+            string name = (sender as Button).Tag.ToString();
+            mutableTuple observed = categoriesObserved.First(x => x.Name == name);
+            Category resCategory = categories.First(x => x.Name == observed.Name);
+            categories.Remove(resCategory);
+            Interactions.RemoveCategory(resCategory);
+            
+            categoriesObserved.Remove(observed);
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox chk = (CheckBox)sender;
             List<Category> tmp = product.Categories == null ? new List<Category>() : product.Categories.ToList();
-            if(chk.IsChecked.Value && tmp.Contains(categories[(int)chk.Tag]))
+            Category resCategory = categories.First(x => x.Name == chk.Tag.ToString());
+            if (chk.IsChecked.Value && tmp.Contains(resCategory))
             {
                 return;
             }
             if(chk.IsChecked.Value)
             {
-                tmp.Add(categories[(int)chk.Tag]);
+                tmp.Add(resCategory);
             } else
             {
-                tmp.Remove(categories[(int)chk.Tag]);
+                tmp.Remove(resCategory);
             }
             product.Categories = tmp.ToArray();
         }
@@ -95,11 +120,17 @@ namespace Rance_App
         {
             Interactions.UpdateProduct(product);
         }
+
+        private void Provision_Click(object sender, RoutedEventArgs e)
+        {
+            int qt = int.Parse(ProvisionQt.Text);
+            DateTime qDte = DateTime.Parse(ProvisionDate.Text);
+            Interactions.AddProvisionOfProduct(new Provision("0", product.EAN, qt, qDte, DateTime.Now));
+        }
     }
 
-    internal class mutableTuple (int ct, bool b, string name)
+    internal class mutableTuple (bool b, string name)
     {
-        public int IDCategory { get; set; } = ct;
         public bool TCheck { get; set; } = b;
         public string Name { get; set; } = name;
     }
