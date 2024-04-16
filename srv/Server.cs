@@ -28,6 +28,7 @@ class RanceServer
         while (true) {
 
             Socket handler = listener.Accept();
+            Console.WriteLine("Connection accepted from " + handler.RemoteEndPoint.ToString());
             Handle(handler);
         }
 
@@ -42,73 +43,75 @@ class RanceServer
         if (ValidateToken(validationtoken)) //TODO: Implement this
         {
             Command command = (Command)BitConverter.ToChar(data.Skip(6).Take(1).ToArray()); //Next 2 are command
-            byte[] body = data.Skip(7).ToArray(); 
+            byte[] body = data.Skip(7).ToArray();
+            byte[] response = null;
             switch (command)
             {
                 case Command.GET_STOCK:
-                    HandleQueryStock();
+                    response = HandleQueryStock();
                     break;
                 case Command.GET_STOCK_COUNT:
-                    HandleQueryStockCount();
+                    response = HandleQueryStockCount();
                     break;
                 case Command.GET_ALERTS_COUNT:
-                    HandleQueryAlertsCount();
+                    response = HandleQueryAlertsCount();
                     break;
                 case Command.GET_PROVISIONS:
-                    HandleQueryProvisionsOfProduct(Serializer.Deserialize<string>(body));
+                    response = HandleQueryProvisionsOfProduct(Serializer.Deserialize<string>(body));
                     break;
                 case Command.GET_PRODUCT:
-                    HandleQueryProduct(Serializer.Deserialize<string>(body));
+                    response = HandleQueryProduct(Serializer.Deserialize<string>(body));
                     break;
                 case Command.GET_CATEGORIES:
-                    HandleQueryCategories();
+                    response = HandleQueryCategories();
                     break;
                 case Command.GET_ALERTS:
-                    HandleQueryAlerts();
+                    response = HandleQueryAlerts();
                     break;
                 case Command.GET_LOGS:
-                    HandleQueryLogs();
+                    response = HandleQueryLogs();
                     break;
                 case Command.GET_RECENT_ALERTS:
-                    HandleQueryRecentAlerts();
+                    response = HandleQueryRecentAlerts();
                     break;
                 case Command.ADD_PRODUCT:
-                    HandleAddProduct(Serializer.Deserialize<Product>(body));
+                    response = HandleAddProduct(Serializer.Deserialize<Product>(body));
                     break;
                 case Command.ADD_PROVISIONS:
-                    HandleAddProvisions(Serializer.Deserialize<Provision>(body));
+                    response = HandleAddProvisions(Serializer.Deserialize<Provision>(body));
                     break;
                 case Command.ADD_CATEGORIES:
-                    HandleAddCategory(Serializer.Deserialize<Category>(body));
+                    response = HandleAddCategory(Serializer.Deserialize<Category>(body));
                     break;
                 case Command.ADD_RULE:
-                    HandleAddRule(Serializer.Deserialize<RanceRule>(body));
+                    response = HandleAddRule(Serializer.Deserialize<RanceRule>(body));
                     break;
                 case Command.EDIT_PRODUCT:
-                    HandleEditProduct(Serializer.Deserialize<Product>(body));
+                    response = HandleEditProduct(Serializer.Deserialize<Product>(body));
                     break;
                 case Command.EDIT_CATEGORY:
-                    HandleEditCategory(Serializer.Deserialize<Category>(body));
+                    response = HandleEditCategory(Serializer.Deserialize<Category>(body));
                     break;
                 case Command.EDIT_RULE:
-                    HandleEditRule(Serializer.Deserialize<RanceRule>(body));
+                    response = HandleEditRule(Serializer.Deserialize<RanceRule>(body));
                     break;
                 case Command.EDIT_PROVISIONS:
-                    HandleEditProvisions(Serializer.Deserialize<Provision>(body));
+                    response = HandleEditProvisions(Serializer.Deserialize<Provision>(body));
                     break;
                 case Command.REMOVE_PRODUCT:
-                    HandleRemoveProduct(Serializer.Deserialize<Product>(body));
+                    response = HandleRemoveProduct(Serializer.Deserialize<Product>(body));
                     break;
                 case Command.REMOVE_PROVISIONS:
-                    HandleRemoveProvisions(Serializer.Deserialize<Provision>(body));
+                    response = HandleRemoveProvisions(Serializer.Deserialize<Provision>(body));
                     break;
                 case Command.REMOVE_CATEGORY:
-                    HandleRemoveCategory(Serializer.Deserialize<Category>(body));
+                    response = HandleRemoveCategory(Serializer.Deserialize<Category>(body));
                     break;
                 case Command.REMOVE_RULE:
-                    HandleRemoveRule(Serializer.Deserialize<RanceRule>(body));
+                    response = HandleRemoveRule(Serializer.Deserialize<RanceRule>(body));
                     break;
             }
+            Send(socket, response);
         }
     }
 
@@ -116,6 +119,7 @@ class RanceServer
     //TODO: Will crash if less than 2 bytes were recieved during first recieve call but I don't want to bother fixing it
     public static byte[] Receive(Socket socket)
     {
+        Console.WriteLine("Receiving data");
         byte[] data = null;
         byte[] bytes;
         int totalRec = 0;
@@ -126,11 +130,12 @@ class RanceServer
             bytes.CopyTo(data, totalRec);
             totalRec += bytesRec;
         } while (totalRec < data.Length);
+        Console.WriteLine("Data received");
         return data;
     }
 
 
-    //TODO: This is untested
+    //TODO: This is not implemented nor used yet
     public static void Send(Socket socket, byte[] data)
     {
         socket.Send(data);
