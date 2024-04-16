@@ -40,15 +40,15 @@ public static class DataSender
 
         using TcpClient client = new TcpClient("localhost", 11000);
         NetworkStream stream = client.GetStream();
-        
+
         stream.Write(data, 0, data.Length);
 
         byte[] buffer = new byte[2];
         stream.Read(buffer, 0, 2);
         int len = BitConverter.ToInt16(buffer);
-        byte[] response = new byte[len-2];
-        
-        for(int i = 2; i < len; i += stream.Read(response, 0, len - i));
+        byte[] response = new byte[len - 2];
+
+        for (int i = 2; i < len; i += stream.Read(response, 0, len - i)) ;
 
         client.Close();
 
