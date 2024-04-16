@@ -35,8 +35,8 @@ public static class DataSender
 
     public static byte[] Send(byte[] data, Command command)
     {
-        //                  SIZE                                TOKEN                       COMMAND                 DATA
-        data = [.. BitConverter.GetBytes(data.Length + 7), .. new byte[4], .. BitConverter.GetBytes((int)command), .. data];
+        //                  SIZE                                          TOKEN                       COMMAND              DATA
+        data = [.. BitConverter.GetBytes((short)(data.Length + 7)), .. new byte[4], .. BitConverter.GetBytes((char)command), .. data];
 
         using TcpClient client = new TcpClient("localhost", 11000);
         NetworkStream stream = client.GetStream();
