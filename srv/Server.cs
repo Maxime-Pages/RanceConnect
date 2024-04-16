@@ -3,7 +3,6 @@ using Command = RanceConnect.Command;
 using System.Net;
 using System.Net.Sockets;
 using LiteDB;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace RanceServer;
 
@@ -37,12 +36,12 @@ class RanceServer
     {
         NetworkStream stream = client.GetStream();
         byte[] data = Receive(stream);
-        Console.WriteLine(BitConverter.ToString(data).Replace("-",""));
+        Console.WriteLine(BitConverter.ToString(data));
         int validationtoken = BitConverter.ToInt32(data.Take(4).ToArray());//First 4 are token
         if (ValidateToken(validationtoken)) //TODO: Implement this
         {
             Command command = (Command)BitConverter.ToChar(data.Skip(4).Take(1).ToArray()); //Next 1 is command
-            byte[] body = data.Skip(7).ToArray();
+            byte[] body = data.Skip(5).ToArray();
             byte[] response = null;
             switch (command)
             {
