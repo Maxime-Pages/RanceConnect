@@ -1,27 +1,14 @@
 ﻿using RanceConnect;
+using Command = RanceConnect.Command;
 using System.Net;
 using System.Net.Sockets;
 using LiteDB;
 
 namespace RanceServer;
 
-public enum Command
-{
-    GET_STOCK = 0,
-    GET_STOCK_COUNT = 1,
-    GET_ALERTS_COUNT = 2,
-    GET_PROVISIONS = 3,
-    GET_PRODUCT = 4,
-    GET_CATEGORIES = 5,
-    GET_ALERTS = 6,
-    GET_LOGS = 7,
-    GET_RECENT_ALERTS = 8,
-    ADD_PRODUCT = 9,
-}
-
 class RanceServer
 {
-    static LiteDatabase? db;
+    static LiteDatabase db;
 
     public static void Main(string[] args)
     {
@@ -46,12 +33,17 @@ class RanceServer
 
     }
 
+
+    //Big ugly switch statement, could do some disgusting pointer arithmetic to make it more less wordy
     public static void Handle(Socket socket)
     {
         byte[] data = Receive(socket);
-        if (ValidateToken(BitConverter.ToInt32(data, 2)))
+        int validationtoken = BitConverter.ToInt32(data.Skip(2).Take(4).ToArray());//First 2 are size, next 4 are token
+        if (ValidateToken(validationtoken)) //TODO: Implement this
         {
-            switch ((Command)BitConverter.ToChar(data, 34))
+            Command command = (Command)BitConverter.ToChar(data.Skip(6).Take(1).ToArray()); //Next 2 are command
+            byte[] body = data.Skip(7).ToArray(); 
+            switch (command)
             {
                 case Command.GET_STOCK:
                     HandleQueryStock();
@@ -63,10 +55,10 @@ class RanceServer
                     HandleQueryAlertsCount();
                     break;
                 case Command.GET_PROVISIONS:
-                    HandleQueryProvisionsOfProduct(Serializer.Deserialize<string>(data.Skip(34).ToArray()));
+                    HandleQueryProvisionsOfProduct(Serializer.Deserialize<string>(body));
                     break;
                 case Command.GET_PRODUCT:
-                    HandleQueryProduct(Serializer.Deserialize<string>(data.Skip(34).ToArray()));
+                    HandleQueryProduct(Serializer.Deserialize<string>(body));
                     break;
                 case Command.GET_CATEGORIES:
                     HandleQueryCategories();
@@ -81,9 +73,41 @@ class RanceServer
                     HandleQueryRecentAlerts();
                     break;
                 case Command.ADD_PRODUCT:
-                    HandleAddProduct(Serializer.Deserialize<Product>(data.Skip(34).ToArray()));
+                    HandleAddProduct(Serializer.Deserialize<Product>(body));
                     break;
-
+                case Command.ADD_PROVISIONS:
+                    HandleAddProvisions(Serializer.Deserialize<Provision>(body));
+                    break;
+                case Command.ADD_CATEGORIES:
+                    HandleAddCategory(Serializer.Deserialize<Category>(body));
+                    break;
+                case Command.ADD_RULE:
+                    HandleAddRule(Serializer.Deserialize<RanceRule>(body));
+                    break;
+                case Command.EDIT_PRODUCT:
+                    HandleEditProduct(Serializer.Deserialize<Product>(body));
+                    break;
+                case Command.EDIT_CATEGORY:
+                    HandleEditCategory(Serializer.Deserialize<Category>(body));
+                    break;
+                case Command.EDIT_RULE:
+                    HandleEditRule(Serializer.Deserialize<RanceRule>(body));
+                    break;
+                case Command.EDIT_PROVISIONS:
+                    HandleEditProvisions(Serializer.Deserialize<Provision>(body));
+                    break;
+                case Command.REMOVE_PRODUCT:
+                    HandleRemoveProduct(Serializer.Deserialize<Product>(body));
+                    break;
+                case Command.REMOVE_PROVISIONS:
+                    HandleRemoveProvisions(Serializer.Deserialize<Provision>(body));
+                    break;
+                case Command.REMOVE_CATEGORY:
+                    HandleRemoveCategory(Serializer.Deserialize<Category>(body));
+                    break;
+                case Command.REMOVE_RULE:
+                    HandleRemoveRule(Serializer.Deserialize<RanceRule>(body));
+                    break;
             }
         }
     }
@@ -105,13 +129,15 @@ class RanceServer
         return data;
     }
 
+
+    //TODO: This is untested
     public static void Send(Socket socket, byte[] data)
     {
         socket.Send(data);
     }
 
 
-    //TODO: Implement this
+    //TODO: Implement this, probably won't, but it's here for the sake of completion
     public static bool ValidateToken(int uid)
     {
         return true;
@@ -169,6 +195,77 @@ class RanceServer
         db.GetCollection<Product>("products").Insert(product);
         return new byte[0];
     }
+
+    public static byte[] /*void*/ HandleAddProvisions(Provision provision)
+    {
+        db.GetCollection<Provision>("provisions").Insert(provision);
+        return new byte[0];
+    }
+
+    public static byte[] /*void*/ HandleAddCategory(Category category)
+    {
+        db.GetCollection<Category>("categories").Insert(category);
+        return new byte[0];
+    }
+
+    public static byte[] /*void*/ HandleAddRule(RanceRule rule)
+    {
+        db.GetCollection<RanceRule>("rules").Insert(rule.GetHashCode(),rule);
+        return new byte[0];
+    }
+
+    public static byte[] /*void*/ HandleEditProduct(Product product)
+    {
+        db.GetCollection<Product>("products").Update(product);
+        return new byte[0];
+    }
+
+    public static byte[] /*void*/ HandleEditCategory(Category category)
+    {
+        db.GetCollection<Category>("categories").Update(category);
+        return new byte[0];
+    }
+
+    public static byte[] /*void*/ HandleEditRule(RanceRule rule)
+    {
+        db.GetCollection<RanceRule>("rules").Update(rule.GetHashCode(), rule);
+        return new byte[0];
+    }
+
+    public static byte[] /*void*/ HandleEditProvisions(Provision provision)
+    {
+        db.GetCollection<Provision>("provisions").Update(provision);
+        return new byte[0];
+    }
+
+    public static byte[] /*void*/ HandleRemoveProduct(Product product)
+    {
+        db.GetCollection<Product>("products").Delete(product.EAN);
+        return new byte[0];
+    }
+
+    public static byte[] /*void*/ HandleRemoveProvisions(Provision provision)
+    {
+        db.GetCollection<Provision>("provisions").Delete(provision.ID);
+        return new byte[0];
+    }
+
+    public static byte[] /*void*/ HandleRemoveCategory(Category category)
+    {
+        db.GetCollection<Category>("categories").Delete(category.Name);
+        return new byte[0];
+    }
+
+    public static byte[] /*void*/ HandleRemoveRule(RanceRule rule)
+    {
+        db.GetCollection<RanceRule>("rules").Delete(rule.GetHashCode());
+        return new byte[0];
+    }
+
+
+
+
+
 
     public static void ProcessAlerts()
     {
