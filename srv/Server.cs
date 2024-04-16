@@ -124,7 +124,7 @@ class RanceServer
         int len = BitConverter.ToInt16(buffer);
         byte[] data = new byte[len - 2];
 
-        for (int i = 2; i < len; i = stream.Read(data, 0, len - i)) ;
+        for (int i = 2; i < len; i += stream.Read(data, 0, len - i)) ;
 
         Console.WriteLine("Data received");
         return data;
