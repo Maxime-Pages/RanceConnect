@@ -12,7 +12,7 @@ class RanceServer
 
     public static void Main(string[] args)
     {
-        db = new LiteDatabase("./temp.db");
+        db = new LiteDatabase("\\db\\temp.db");
         AppDomain.CurrentDomain.ProcessExit += (s, e) => db?.Dispose();
 
         TcpListener listener = new TcpListener(IPAddress.Any, 11000);
