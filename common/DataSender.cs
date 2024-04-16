@@ -36,8 +36,10 @@ public static class DataSender
     public static int port  = 11000;
     private static IPEndPoint iPEndPoint;
 
-    public static byte[] Send(byte[] data)
+    public static byte[] Send(byte[] data, Command command)
     {
+        //                  SIZE                                TOKEN                       COMMAND                 DATA
+        data = [.. BitConverter.GetBytes(data.Length+7), .. new byte[4], .. BitConverter.GetBytes((int)command), .. data];
         //Create IPEndpoint if it doesn't exist
         if (iPEndPoint == null){
             IPHostEntry host = Dns.GetHostEntry("localhost");
