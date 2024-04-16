@@ -167,7 +167,10 @@ class RanceServer
 
     public static byte[] /*Product*/ HandleQueryProduct(string EAN)
     {
-        return Serializer.Serialize(db.GetCollection<Product>("products").FindOne(product => product.EAN == EAN));
+        Console.WriteLine(EAN);
+        Product product = db.GetCollection<Product>("products").FindOne(product => product.EAN == EAN);
+        Console.WriteLine(product.Name);
+        return Serializer.Serialize(product);
     }
 
     public static byte[] /*List<Category>*/ HandleQueryCategories()
