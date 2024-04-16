@@ -32,40 +32,25 @@ public enum Command
 public static class DataSender
 {
 
-    public static string remote = "";
-    public static int port  = 11000;
-    private static IPEndPoint iPEndPoint;
 
     public static byte[] Send(byte[] data, Command command)
     {
         //                  SIZE                                TOKEN                       COMMAND                 DATA
-        data = [.. BitConverter.GetBytes(data.Length+7), .. new byte[4], .. BitConverter.GetBytes((int)command), .. data];
-        //Create IPEndpoint if it doesn't exist
-        if (iPEndPoint == null){
-            IPHostEntry host = Dns.GetHostEntry("localhost");
-            IPAddress ipAddress = host.AddressList[0];
-            iPEndPoint = new (ipAddress,port);
-        }
+        data = [.. BitConverter.GetBytes(data.Length + 7), .. new byte[4], .. BitConverter.GetBytes((int)command), .. data];
 
+        using TcpClient client = new TcpClient("localhost", 11000);
+        NetworkStream stream = client.GetStream();
+        
+        stream.Write(data, 0, data.Length);
 
-        using Socket client = new(iPEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-        client.Connect(iPEndPoint);
-    
-        client.Send(data);
+        byte[] buffer = new byte[2];
+        stream.Read(buffer, 0, 2);
+        int len = BitConverter.ToInt16(buffer);
+        byte[] response = new byte[len-2];
         
-        byte[] response = null;
-        byte[] bytes;
-        int totalRec = 0;
-        
-        do{
-            bytes = new byte[2048];
-            int bytesRec = client.Receive(bytes);
-            response ??= new byte[BitConverter.ToInt16(bytes,0)];
-            bytes.CopyTo(response,totalRec);
-            totalRec += bytesRec;
-        }while(totalRec < data.Length);
-        
-        client.Shutdown(SocketShutdown.Both);
+        for(int i = 2; i < len; i = stream.Read(response, 0, len - i));
+
+        client.Close();
 
         return response;
     }
