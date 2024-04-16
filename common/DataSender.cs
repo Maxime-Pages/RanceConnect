@@ -48,7 +48,7 @@ public static class DataSender
         int len = BitConverter.ToInt16(buffer);
         byte[] response = new byte[len-2];
         
-        for(int i = 2; i < len; i = stream.Read(response, 0, len - i));
+        for(int i = 2; i < len; i += stream.Read(response, 0, len - i));
 
         client.Close();
 
