@@ -109,7 +109,7 @@ class RanceServer
                     response = HandleRemoveRule(Serializer.Deserialize<RanceRule>(body));
                     break;
             }
-            Send(socket, response);
+            Send(stream, response);
         }
     }
 
