@@ -40,10 +40,8 @@ class RanceServer
         int validationtoken = BitConverter.ToInt32(data.Take(4).ToArray());//First 4 are token
         if (ValidateToken(validationtoken)) //TODO: Implement this
         {
-            Console.WriteLine(BitConverter.ToString(data.Skip(4).Take(1).ToArray()));
-            Console.WriteLine((Command)BitConverter.ToChar(data.Skip(4).Take(1).ToArray()));
-            Command command = (Command)BitConverter.ToChar(data.Skip(4).Take(1).ToArray()); //Next 1 is command
-            byte[] body = data.Skip(5).ToArray();
+            Command command = (Command)BitConverter.ToChar(data.Skip(4).Take(2).ToArray()); //Next 1 is command
+            byte[] body = data.Skip(6).ToArray();
             byte[] response = null;
             switch (command)
             {
@@ -134,6 +132,7 @@ class RanceServer
 
     public static void Send(NetworkStream stream, byte[] data)
     {
+        data = [.. BitConverter.GetBytes((short)(data.Length + 2)), .. data];
         stream.Write(data, 0, data.Length);
     }
 
