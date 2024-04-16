@@ -15,8 +15,7 @@ class RanceServer
         db = new LiteDatabase("./temp.db");
         AppDomain.CurrentDomain.ProcessExit += (s, e) => db?.Dispose();
 
-        IPHostEntry host = Dns.GetHostEntry("localhost");
-        IPAddress ipAddress = host.AddressList[0];
+        IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
         IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, 11000);
 
         using Socket listener = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
