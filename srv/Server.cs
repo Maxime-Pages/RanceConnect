@@ -38,10 +38,10 @@ class RanceServer
         NetworkStream stream = client.GetStream();
         byte[] data = Receive(stream);
         Console.WriteLine(BitConverter.ToString(data).Replace("-",""));
-        int validationtoken = BitConverter.ToInt32(data.Skip(2).Take(4).ToArray());//First 2 are size, next 4 are token
+        int validationtoken = BitConverter.ToInt32(data.Take(4).ToArray());//First 4 are token
         if (ValidateToken(validationtoken)) //TODO: Implement this
         {
-            Command command = (Command)BitConverter.ToChar(data.Skip(6).Take(1).ToArray()); //Next 2 are command
+            Command command = (Command)BitConverter.ToChar(data.Skip(4).Take(1).ToArray()); //Next 1 is command
             byte[] body = data.Skip(7).ToArray();
             byte[] response = null;
             switch (command)
