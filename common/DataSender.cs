@@ -1,14 +1,40 @@
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 
 namespace RanceConnect;
 
+
+
+public enum Command
+{
+    GET_STOCK = 0,
+    GET_STOCK_COUNT,
+    GET_ALERTS_COUNT,
+    GET_PROVISIONS,
+    GET_PRODUCT,
+    GET_CATEGORIES,
+    GET_ALERTS,
+    GET_LOGS,
+    GET_RECENT_ALERTS,
+    ADD_PRODUCT,
+    ADD_PROVISIONS,
+    ADD_CATEGORIES,
+    ADD_RULE,
+    EDIT_PRODUCT,
+    EDIT_CATEGORY,
+    EDIT_RULE,
+    EDIT_PROVISIONS,
+    REMOVE_PRODUCT,
+    REMOVE_PROVISIONS,
+    REMOVE_CATEGORY,
+    REMOVE_RULE,
+}
 public static class DataSender
 {
+
     public static string remote = "";
     public static int port  = 11000;
-    private static IPEndPoint? iPEndPoint;
+    private static IPEndPoint iPEndPoint;
 
     public static byte[] Send(byte[] data)
     {
