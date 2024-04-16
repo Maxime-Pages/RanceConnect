@@ -40,6 +40,7 @@ class RanceServer
         int validationtoken = BitConverter.ToInt32(data.Take(4).ToArray());//First 4 are token
         if (ValidateToken(validationtoken)) //TODO: Implement this
         {
+            Console.WriteLine((Command)BitConverter.ToChar(data.Skip(4).Take(1).ToArray()));
             Command command = (Command)BitConverter.ToChar(data.Skip(4).Take(1).ToArray()); //Next 1 is command
             byte[] body = data.Skip(5).ToArray();
             byte[] response = null;
