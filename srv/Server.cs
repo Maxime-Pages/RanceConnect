@@ -169,7 +169,7 @@ class RanceServer
     {
         Console.WriteLine(EAN);
         Product product = db.GetCollection<Product>("products").FindOne(product => product.EAN == EAN);
-        Console.WriteLine(product.Name);
+        //Console.WriteLine(product.Name);
         return Serializer.Serialize(product);
     }
 
@@ -195,6 +195,7 @@ class RanceServer
 
     public static byte[] /*void*/ HandleAddProduct(Product product)
     {
+        Console.WriteLine(product.Name);
         db.GetCollection<Product>("products").Insert(product);
         return new byte[0];
     }
