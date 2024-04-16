@@ -3,6 +3,7 @@ using Command = RanceConnect.Command;
 using System.Net;
 using System.Net.Sockets;
 using LiteDB;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace RanceServer;
 
@@ -23,18 +24,19 @@ class RanceServer
         //Listening Loop
         while (true) {
 
-            Socket handler = listener.AcceptSocket();
-            Console.WriteLine("Connection accepted from " + handler.RemoteEndPoint.ToString());
+            TcpClient handler = listener.AcceptTcpClient() ;
+            Console.WriteLine("Connection accepted from " + handler.Client.RemoteEndPoint.ToString());
             Handle(handler);
         }
-
+         
     }
 
 
     //Big ugly switch statement, could do some disgusting pointer arithmetic to make it more less wordy
-    public static void Handle(Socket socket)
+    public static void Handle(TcpClient client)
     {
-        byte[] data = Receive(socket);
+        NetworkStream stream = client.GetStream();
+        byte[] data = Receive(stream);
         int validationtoken = BitConverter.ToInt32(data.Skip(2).Take(4).ToArray());//First 2 are size, next 4 are token
         if (ValidateToken(validationtoken)) //TODO: Implement this
         {
@@ -113,28 +115,24 @@ class RanceServer
 
 
     //TODO: Will crash if less than 2 bytes were recieved during first recieve call but I don't want to bother fixing it
-    public static byte[] Receive(Socket socket)
+    public static byte[] Receive(NetworkStream stream)
     {
         Console.WriteLine("Receiving data");
-        byte[] data = null;
-        byte[] bytes;
-        int totalRec = 0;
-        do {
-            bytes = new byte[2048];
-            int bytesRec = socket.Receive(bytes);
-            data ??= new byte[BitConverter.ToInt16(bytes, 0)];
-            bytes.CopyTo(data, totalRec);
-            totalRec += bytesRec;
-        } while (totalRec < data.Length);
+
+        byte[] buffer = new byte[2];
+        stream.Read(buffer, 0, 2);
+        int len = BitConverter.ToInt16(buffer);
+        byte[] data = new byte[len - 2];
+
+        for (int i = 2; i < len; i = stream.Read(data, 0, len - i)) ;
+
         Console.WriteLine("Data received");
         return data;
     }
 
-
-    //TODO: This is not implemented nor used yet
-    public static void Send(Socket socket, byte[] data)
+    public static void Send(NetworkStream stream, byte[] data)
     {
-        socket.Send(data);
+        stream.Write(data, 0, data.Length);
     }
 
 
