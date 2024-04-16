@@ -15,18 +15,15 @@ class RanceServer
         db = new LiteDatabase("./temp.db");
         AppDomain.CurrentDomain.ProcessExit += (s, e) => db?.Dispose();
 
-        IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
-        IPEndPoint ipEndPoint = new IPEndPoint(ipAddress, 11000);
+        TcpListener listener = new TcpListener(IPAddress.Any, 11000);
 
-        using Socket listener = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-        listener.Bind(ipEndPoint);
-        listener.Listen(100);
+        listener.Start();
 
         Console.WriteLine("Ready to accept connections");
         //Listening Loop
         while (true) {
 
-            Socket handler = listener.Accept();
+            Socket handler = listener.AcceptSocket();
             Console.WriteLine("Connection accepted from " + handler.RemoteEndPoint.ToString());
             Handle(handler);
         }
