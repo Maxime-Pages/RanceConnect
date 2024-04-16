@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace RanceConnect
 {
-    [Chroma.Name("Provisions")]
     public class Provision
     {
         string id;

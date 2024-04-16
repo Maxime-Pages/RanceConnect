@@ -2,7 +2,6 @@ using Chroma;
 
 namespace RanceConnect;
 
-[Chroma.Name("Products")]
 public class Product
 {
     string name;
