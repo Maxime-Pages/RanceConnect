@@ -206,6 +206,7 @@ class RanceServer
 
     public static byte[] /*void*/ HandleAddProvisions(Provision provision)
     {
+        provision.ID = Guid.NewGuid().ToString();
         db.GetCollection<Provision>("provisions").Insert(provision.ID,provision);
         return Serializer.Serialize(provision);
     }
