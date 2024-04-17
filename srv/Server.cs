@@ -43,6 +43,7 @@ class RanceServer
             Command command = (Command)BitConverter.ToChar(data.Skip(4).Take(2).ToArray()); //Next 1 is command
             byte[] body = data.Skip(6).ToArray();
             byte[] response = null;
+            Console.WriteLine(BitConverter.ToString(body));
             switch (command)
             {
                 case Command.GET_STOCK:
