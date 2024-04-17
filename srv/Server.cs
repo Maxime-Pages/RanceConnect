@@ -56,10 +56,10 @@ class RanceServer
                     response = HandleQueryAlertsCount();
                     break;
                 case Command.GET_PROVISIONS:
-                    response = HandleQueryProvisionsOfProduct(Serializer.Deserialize<string>(body));
+                    response = HandleQueryProvisionsOfProduct(Serializer.Deserialize<List<string>>(body));
                     break;
                 case Command.GET_PRODUCT:
-                    response = HandleQueryProduct(body.ToString());
+                    response = HandleQueryProduct(Serializer.Deserialize<List<string>>(body));
                     break;
                 case Command.GET_CATEGORIES:
                     response = HandleQueryCategories();
@@ -161,15 +161,15 @@ class RanceServer
         return Serializer.Serialize(db.GetCollection<Alert>("alerts").Count());
     }
 
-    public static byte[] /*List<Provision>*/ HandleQueryProvisionsOfProduct(string EAN)
+    public static byte[] /*List<Provision>*/ HandleQueryProvisionsOfProduct(List<string> EAN)
     {
-        return Serializer.Serialize(db.GetCollection<Provision>("provisions").Query().Where(provision => provision.EAN == EAN).ToList());
+        return Serializer.Serialize(db.GetCollection<Provision>("provisions").Query().Where(provision => provision.EAN == EAN[0]).ToList());
     }
 
-    public static byte[] /*Product*/ HandleQueryProduct(string EAN)
+    public static byte[] /*Product*/ HandleQueryProduct(List<string> EAN)
     {
-        Console.WriteLine(EAN);
-        Product product = db.GetCollection<Product>("products").FindOne(product => product.EAN == EAN);
+        Console.WriteLine(EAN[0]);
+        Product product = db.GetCollection<Product>("products").FindOne(product => product.EAN == EAN[0]);
         //Console.WriteLine(product.Name);
         return Serializer.Serialize(product);
     }
