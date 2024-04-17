@@ -109,7 +109,13 @@ namespace Rance_App
 
         private void AddProduct_Click(object sender, RoutedEventArgs e)
         {
-            Interactions.AddProduct(Name.Text, EAN.Text, float.Parse(Price.Text), float.Parse(SalesPrice.Text), DateTime.Now, int.Parse(MinimalStock.Text), int.Parse(StockToReach.Text));
+            Price.Text = Price.Text.Replace(".", ",");
+            SalesPrice.Text = SalesPrice.Text.Replace(".", ",");
+            if (!float.TryParse(Price.Text, out float price))
+                return;
+            if (!float.TryParse(SalesPrice.Text, out float salesPrice))
+                return;
+            Interactions.AddProduct(Name.Text, EAN.Text, price, salesPrice, DateTime.Now, int.Parse(MinimalStock.Text), int.Parse(StockToReach.Text));
             NavigationService ns = NavigationService.GetNavigationService(this);
             ns.Content = new Stock();
         }

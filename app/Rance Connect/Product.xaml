@@ -78,10 +78,10 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid>
-                    <Button Content="Supprimer le produit" Width="150" Margin="30,0,0,0" HorizontalAlignment="Left" Background="#FFC71818" Foreground="White"/>
+                    <Button Content="Supprimer le produit" Click="Remove_Click" Width="150" Margin="30,0,0,0" HorizontalAlignment="Left" Background="#FFC71818" Foreground="White"/>
                     <TextBox x:Name="Name" Text="Product Name" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="300" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" FontSize="20" TextAlignment="Center"/>
                     <Button x:Name="CategorieButton" Content="Afficher les catégories" Width="150" Margin="0,0,60,0" HorizontalAlignment="Right" Click="CategoriesButton_Click"/>
-                    <Button Content="X" Click="Remove_Click" Width="30" Margin="0,0,0,0" HorizontalAlignment="Right" Background="{x:Null}" Foreground="#FF7D0000" BorderBrush="#FF373737"/>
+                    <Button Content="X" Click="Back_Click" Width="30" Margin="0,0,0,0" HorizontalAlignment="Right" Background="{x:Null}" Foreground="#FF7D0000" BorderBrush="#FF373737"/>
                 </Grid>
                 <TextBox Grid.Row="1" x:Name="EAN" Text="Product EAN" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="600" Background="Transparent" Foreground="#FFDADADA" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Column="1" TextAlignment="Center"/>
 
@@ -110,7 +110,7 @@
                 <TextBox x:Name="ExpirationAlert" HorizontalAlignment="Left" Margin="208,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="164" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Row="2" Height="18"/>
             </Grid>
 
-            <Grid Grid.Row="2" Background="LightGreen">
+            <Grid Grid.Row="2" Background="LightGreen" Margin="10, 0, 10, 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120"/>
                     <ColumnDefinition Width="210"/>
@@ -165,7 +165,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button x:Name="Remove" Tag="{Binding ID}" Content="Retirer" Click="Remove_Click"></Button>
+                                    <Button x:Name="Remove" Tag="{Binding ID}" Content="Retirer" Click="RemoveProvisions_Click"></Button>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

@@ -23,7 +23,7 @@ namespace Rance_App
     /// </summary>
     public partial class Product : Page
     {
-        private List<Provision> products;
+        private List<Provision> provisions;
         private RanceConnect.Product product;
         private List<Category> categories;
         private ObservableCollection<mutableTuple> categoriesObserved;
@@ -32,22 +32,38 @@ namespace Rance_App
         {
             InitializeComponent();
             EAN.Text = ean;
-            products = Interactions.QueryProvisionsOfProduct(ean);
+            provisions = Interactions.QueryProvisionsOfProduct(ean);
             product = Interactions.QueryProduct(ean);
             categories = Interactions.QueryCategories();
             Name.Text = product.Name;
             Price.Text = product.Price.ToString();
             SalesPrice.Text = product.Salesamount.ToString();
             int quantity = 0;
-            foreach (Provision p in products)
+            foreach (Provision p in provisions)
             {
                 quantity += p.Quantity;
             }
             TotalQuantity.Text = quantity.ToString();
-            Packs.ItemsSource = products;
+            Packs.ItemsSource = provisions;
         }
 
         private void Remove_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            if (!Interactions.RemoveProduct(product))
+                ns.Content = new Alertes();
+            ns.Content = new Stock();
+        }
+
+        private void RemoveProvisions_Click(object sender, RoutedEventArgs e)
+        {
+            int id = int.Parse((sender as Button).Tag.ToString());
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            if (!Interactions.RemoveProvision(provisions[id]))
+                ns.Content = new Alertes();
+            
+        }
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService ns = NavigationService.GetNavigationService(this);
             ns.GoBack();
@@ -125,7 +141,16 @@ namespace Rance_App
         {
             int qt = int.Parse(ProvisionQt.Text);
             DateTime qDte = DateTime.Parse(ProvisionDate.Text);
-            Interactions.AddProvisionOfProduct(new Provision("0", product.EAN, qt, qDte, DateTime.Now));
+            Provision provision = Interactions.AddProvisionOfProduct(new Provision("0", product.EAN, qt, qDte, DateTime.Now));
+            if (provision == null)
+            {
+                NavigationService ns = NavigationService.GetNavigationService(this);
+                ns.Content = new Alertes();
+            }
+            List<Provision> provisions = Packs.ItemsSource != null ? Packs.ItemsSource as List<Provision> : new List<Provision>();
+            provisions.Add(provision);
+            Packs.ItemsSource = provisions;
+            TotalQuantity.Text = (int.Parse(TotalQuantity.Text)+1).ToString();
         }
     }
 
