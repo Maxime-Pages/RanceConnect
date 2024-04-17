@@ -59,7 +59,7 @@ class RanceServer
                     response = HandleQueryProvisionsOfProduct(Serializer.Deserialize<string>(body));
                     break;
                 case Command.GET_PRODUCT:
-                    response = HandleQueryProduct(Serializer.Deserialize<string>(body));
+                    response = HandleQueryProduct(body.ToString());
                     break;
                 case Command.GET_CATEGORIES:
                     response = HandleQueryCategories();
