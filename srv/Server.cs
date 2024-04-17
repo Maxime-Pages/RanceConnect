@@ -200,19 +200,19 @@ class RanceServer
     public static byte[] /*void*/ HandleAddProduct(Product product)
     {
         Console.WriteLine(product.Name);
-        db.GetCollection<Product>("products").Insert(product);
+        db.GetCollection<Product>("products").Insert(product.EAN, product);
         return Serializer.Serialize(product);
     }
 
     public static byte[] /*void*/ HandleAddProvisions(Provision provision)
     {
-        db.GetCollection<Provision>("provisions").Insert(provision);
+        db.GetCollection<Provision>("provisions").Insert(provision.ID,provision);
         return Serializer.Serialize(provision);
     }
 
     public static byte[] /*void*/ HandleAddCategory(Category category)
     {
-        db.GetCollection<Category>("categories").Insert(category);
+        db.GetCollection<Category>("categories").Insert(category.GetHashCode(), category);
         return Serializer.Serialize(category);
     }
 
@@ -224,12 +224,12 @@ class RanceServer
 
     public static byte[] /*void*/ HandleEditProduct(Product product)
     {
-        return Serializer.Serialize(db.GetCollection<Product>("products").Update(product));
+        return Serializer.Serialize(db.GetCollection<Product>("products").Update(product.EAN, product));
     }
 
     public static byte[] /*void*/ HandleEditCategory(Category category)
     {
-        return Serializer.Serialize(db.GetCollection<Category>("categories").Update(category));
+        return Serializer.Serialize(db.GetCollection<Category>("categories").Update(category.GetHashCode(),category));
     }
 
     public static byte[] /*void*/ HandleEditRule(RanceRule rule)
@@ -239,7 +239,7 @@ class RanceServer
 
     public static byte[] /*void*/ HandleEditProvisions(Provision provision)
     {
-        return Serializer.Serialize(db.GetCollection<Provision>("provisions").Update(provision));
+        return Serializer.Serialize(db.GetCollection<Provision>("provisions").Update(provision.ID,provision));
     }
 
     public static byte[] /*void*/ HandleRemoveProduct(Product product)
@@ -254,7 +254,7 @@ class RanceServer
 
     public static byte[] /*void*/ HandleRemoveCategory(Category category)
     {
-        return Serializer.Serialize(db.GetCollection<Category>("categories").Delete(category.Name));
+        return Serializer.Serialize(db.GetCollection<Category>("categories").Delete(category.GetHashCode()));
         
     }
 
