@@ -3,6 +3,7 @@ using Command = RanceConnect.Command;
 using System.Net;
 using System.Net.Sockets;
 using LiteDB;
+using System.ComponentModel;
 
 namespace RanceServer;
 
@@ -41,6 +42,7 @@ class RanceServer
         if (ValidateToken(validationtoken)) //TODO: Implement this
         {
             Command command = (Command)BitConverter.ToChar(data.Skip(4).Take(2).ToArray()); //Next 1 is command
+            Console.WriteLine(command);
             byte[] body = data.Skip(6).ToArray();
             byte[] response = null;
             Console.WriteLine(BitConverter.ToString(body));
@@ -199,73 +201,67 @@ class RanceServer
     {
         Console.WriteLine(product.Name);
         db.GetCollection<Product>("products").Insert(product);
-        return new byte[0];
+        return Serializer.Serialize(product);
     }
 
     public static byte[] /*void*/ HandleAddProvisions(Provision provision)
     {
         db.GetCollection<Provision>("provisions").Insert(provision);
-        return new byte[0];
+        return Serializer.Serialize(provision);
     }
 
     public static byte[] /*void*/ HandleAddCategory(Category category)
     {
         db.GetCollection<Category>("categories").Insert(category);
-        return new byte[0];
+        return Serializer.Serialize(category);
     }
 
     public static byte[] /*void*/ HandleAddRule(RanceRule rule)
     {
         db.GetCollection<RanceRule>("rules").Insert(rule.GetHashCode(),rule);
-        return new byte[0];
+        return Serializer.Serialize(rule);
     }
 
     public static byte[] /*void*/ HandleEditProduct(Product product)
     {
-        db.GetCollection<Product>("products").Update(product);
-        return new byte[0];
+        return Serializer.Serialize(db.GetCollection<Product>("products").Update(product));
     }
 
     public static byte[] /*void*/ HandleEditCategory(Category category)
     {
-        db.GetCollection<Category>("categories").Update(category);
-        return new byte[0];
+        return Serializer.Serialize(db.GetCollection<Category>("categories").Update(category));
     }
 
     public static byte[] /*void*/ HandleEditRule(RanceRule rule)
     {
-        db.GetCollection<RanceRule>("rules").Update(rule.GetHashCode(), rule);
-        return new byte[0];
+        return Serializer.Serialize(db.GetCollection<RanceRule>("rules").Update(rule.GetHashCode(), rule));
     }
 
     public static byte[] /*void*/ HandleEditProvisions(Provision provision)
     {
-        db.GetCollection<Provision>("provisions").Update(provision);
-        return new byte[0];
+        return Serializer.Serialize(db.GetCollection<Provision>("provisions").Update(provision));
     }
 
     public static byte[] /*void*/ HandleRemoveProduct(Product product)
     {
-        db.GetCollection<Product>("products").Delete(product.EAN);
-        return new byte[0];
+        return Serializer.Serialize(db.GetCollection<Product>("products").Delete(product.EAN));
     }
 
     public static byte[] /*void*/ HandleRemoveProvisions(Provision provision)
     {
-        db.GetCollection<Provision>("provisions").Delete(provision.ID);
-        return new byte[0];
+        return Serializer.Serialize(db.GetCollection<Provision>("provisions").Delete(provision.ID));
     }
 
     public static byte[] /*void*/ HandleRemoveCategory(Category category)
     {
-        db.GetCollection<Category>("categories").Delete(category.Name);
-        return new byte[0];
+        return Serializer.Serialize(db.GetCollection<Category>("categories").Delete(category.Name));
+        
     }
 
     public static byte[] /*void*/ HandleRemoveRule(RanceRule rule)
     {
-        db.GetCollection<RanceRule>("rules").Delete(rule.GetHashCode());
-        return new byte[0];
+        return Serializer.Serialize(db.GetCollection<RanceRule>("rules").Delete(rule.GetHashCode()));
+        
     }
 
 
