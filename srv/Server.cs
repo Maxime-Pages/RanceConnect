@@ -163,7 +163,8 @@ class RanceServer
 
     public static byte[] /*List<Provision>*/ HandleQueryProvisionsOfProduct(List<string> EAN)
     {
-        return Serializer.Serialize(db.GetCollection<Provision>("provisions").Query().Where(provision => provision.EAN == EAN[0]).ToList());
+        string ean = EAN[0];
+        return Serializer.Serialize(db.GetCollection<Provision>("provisions").Query().Where(provision => provision.EAN == ean).ToList());
     }
 
     public static byte[] /*Product*/ HandleQueryProduct(List<string> EAN)
