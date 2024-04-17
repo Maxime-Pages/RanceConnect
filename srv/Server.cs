@@ -277,6 +277,7 @@ class RanceServer
         List<Alert> alerts = db.GetCollection<Alert>("alerts").FindAll().ToList();
         foreach (Product product in db.GetCollection<Product>("products").FindAll())
         {
+            if (product.Rules == null) continue;
             foreach (RanceRule rule in product.Rules)
             {
                 switch (rule.GetType().Name)
