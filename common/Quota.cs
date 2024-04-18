@@ -5,6 +5,12 @@ public class Quota : RanceRule
     public int Minimum;
     public int Maximum;
 
+    public Quota()
+    {
+        Minimum = 0;
+        Maximum = 0;
+    }
+
     public Quota(int max, int min)
     {
         Minimum = min;
