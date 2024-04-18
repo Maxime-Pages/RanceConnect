@@ -169,7 +169,8 @@ namespace Rance_App
         private void Provision_Click(object sender, RoutedEventArgs e)
         {
             int qt = int.Parse(ProvisionQt.Text);
-            DateTime qDte = DateTime.Parse(ProvisionDate.Text);
+            if (!DateTime.TryParse(ProvisionDate.Text, out DateTime qDte))
+                return;
             Provision provision = Interactions.AddProvisionOfProduct(new Provision("0", product.EAN, qt, qDte, DateTime.Now));
             if (provision == null)
             {
