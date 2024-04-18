@@ -1,9 +1,15 @@
 namespace RanceConnect;
 
-public class Quota(int max, int min) : RanceRule
+public class Quota : RanceRule
 {
-    public int Minimum = min;
-    public int Maximum = max;
+    public int Minimum;
+    public int Maximum;
+
+    public Quota(int max, int min)
+    {
+        Minimum = min;
+        Maximum = max;
+    }
 
     public override bool IsValid(object input)
     {
