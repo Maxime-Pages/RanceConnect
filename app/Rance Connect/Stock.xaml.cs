@@ -183,7 +183,7 @@ namespace Rance_App
         {
             if (value is float price)
             {
-                return Math.Round(price, 2).ToString("0.00");
+                return Math.Round(price, 2).ToString("0.00") + "€";
             }
 
             return value;
