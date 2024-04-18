@@ -1,13 +1,13 @@
 namespace RanceConnect;
 
-public class Quota : RanceRule
+public class Quota(int max, int min) : RanceRule
 {
-    int minimum;
-    int maximum;
+    public int Minimum;
+    public int Maximum;
 
     public override bool IsValid(object input)
     {
         int stock = (int)input;
-        return stock >= minimum && stock <= maximum;
+        return stock >= Minimum && stock <= Maximum;
     }
 }
