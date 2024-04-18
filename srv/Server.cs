@@ -26,14 +26,14 @@ class RanceServer
 
             TcpClient handler = listener.AcceptTcpClient() ;
             Console.WriteLine("Connection accepted from " + handler.Client.RemoteEndPoint.ToString());
-            Handle(handler);
+            Handle(handler, handler.Client.RemoteEndPoint.ToString());
         }
          
     }
 
 
     //Big ugly switch statement, could do some disgusting pointer arithmetic to make it more less wordy
-    public static void Handle(TcpClient client)
+    public static void Handle(TcpClient client,string remoteIP)
     {
         NetworkStream stream = client.GetStream();
         byte[] data = Receive(stream);
@@ -46,6 +46,8 @@ class RanceServer
             byte[] body = data.Skip(6).ToArray();
             byte[] response = null;
             Console.WriteLine(BitConverter.ToString(body));
+            Log log = new Log($"User {remoteIP} sent {command}", DateTime.Now);
+            db.GetCollection<Log>("log").Insert(log.GetHashCode(),log);
             switch (command)
             {
                 case Command.GET_STOCK:
