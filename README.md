@@ -55,6 +55,11 @@ Les membres du projet sont
     - Quotas : le seuil minimum à partir duquel on crée une alerte (et/ou on passe une commande), ainsi que le seuil maximum à partir duquel on arrête de passer des commandes
 - Ces règles ont pour but de créer des alertes automatiquement lorsqu'on atteint un seuil ou une date de péremption
 
+### Gestion des dates de péremption
+
+- La page produit répertorie les différents lots avec leurs dates de péremption pour un produit donné.
+- on peut supprimer un lot si tous les produits de ce dernier ont été vendus, ce qui permet de supprimer l'alerte de péremption pour ce lot, le cas échéant.
+
 ### Gestion des alertes
 
 - Les alertes sont surtout caractérisées par un nom, un type, et l'EAN du produit concerné
@@ -72,5 +77,28 @@ Les membres du projet sont
 
 ## Installation
 
+ ### Serveur
+
+Il suffit de télécharger, dans la branche server du github, le fichier Makefile ainsi que le fichier dockerfile, puis d'exécuter la commande make.
+
+Le script se chargera ensuite de télécharger de lui même le reste des dépendances, et de lancer le docker qui fait tourner le serveur.
+
+### Client
+
+Un fichier .exe est fourni dans l'onglet release, il duffit de le télécharger et de le lancer. Il faut cependant avoir un serveur qui tourne auquel se connecter, car certaines exceptions ne sont pas encore gérées.
+
 ## Utilisation
 
+Le programme est plutôt simple d'utilisation. 
+
+La page principale affiche les stocks et les alertes.
+
+La page stocks affiche avec plus de détails tous les produits du stock, et permet de se rendre sur une page d'un produit spécifique.
+
+La page produit permet de créer des règles et de modifier les informations d'un produit spécifique, ainsi que d'accéder au popup catagories. Elle affiche également les différents lots de livraisons de ce produit, avec leurs dates de péremption, pour la gestion des alertes.
+
+Le popup catégories permet de voir toutes les catégories, d'en créer et d'en supprimer, ainsi que de rajouter et retirer des catégories au produit spécifique que l'on manipule.
+
+La page alerte affiche toutes les alertes actuellement en cours, et permet de se rendre rapidement sur la page du produit concerné.
+
+La page logs affiche tous les logs de l'application, avec leur date et leur description.
