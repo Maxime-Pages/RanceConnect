@@ -3,6 +3,7 @@ using Command = RanceConnect.Command;
 using System.Net;
 using System.Net.Sockets;
 using LiteDB;
+using System.Data;
 
 namespace RanceServer;
 
@@ -14,6 +15,13 @@ class RanceServer
     {
         db = new LiteDatabase("./temp.db");
         AppDomain.CurrentDomain.ProcessExit += (s, e) => db?.Dispose();
+
+        BsonMapper.Global.Entity<Provision>().Id(provision => provision.ID);
+        BsonMapper.Global.Entity<Product>().Id(product => product.EAN);
+        BsonMapper.Global.Entity<Category>().Id(category => category.GetHashCode());
+        BsonMapper.Global.Entity<RanceRule>().Id(rule => rule.GetHashCode());
+        BsonMapper.Global.Entity<Alert>().Id(alert => alert.GetHashCode());
+        BsonMapper.Global.Entity<Log>().Id(log => log.GetHashCode());
 
         TcpListener listener = new TcpListener(IPAddress.Any, 11000);
 
@@ -198,6 +206,10 @@ class RanceServer
     {
         Console.WriteLine(product.Name);
         db.GetCollection<Product>("products").Insert(product.EAN, product);
+        foreach(RanceRule rule in product.Rules)
+        {
+            db.GetCollection<RanceRule>("rules").Insert(product.EAN, rule);
+        }
         return Serializer.Serialize(product);
     }
 
@@ -272,8 +284,8 @@ class RanceServer
         List<Alert> alerts = db.GetCollection<Alert>("alerts").FindAll().ToList();
         foreach (Product product in db.GetCollection<Product>("products").FindAll())
         {
-            if (product.Rules == null) continue;
-            foreach (RanceRule rule in product.Rules)
+            List<RanceRule> rules = db.GetCollection<RanceRule>("rules").FindById(product.EAN);
+            foreach (RanceRule rule)
             {
                 switch (rule.GetType().Name)
                 {

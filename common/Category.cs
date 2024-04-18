@@ -1,8 +1,10 @@
+using LiteDB;
 namespace RanceConnect;
 
 public class Category
 {
     string name;
+    [BsonRef("rules")]
     RanceRule[] rules;
 
     public string Name { get => name; set => name = value; }

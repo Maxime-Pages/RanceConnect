@@ -1,4 +1,6 @@
 
+using LiteDB;
+
 namespace RanceConnect;
 
 public class Product
@@ -14,9 +16,10 @@ public class Product
     int quantity;
 
     DateTime dateAdded;
-
+    [BsonRef("categories")]
     Category[] categories;
-    
+    [BsonRef("rules")]
+
     RanceRule[] rules;
 
     public string Name { get => name; set => name = value; }

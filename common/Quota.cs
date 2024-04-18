@@ -1,3 +1,5 @@
+using LiteDB;
+
 namespace RanceConnect;
 
 public class Quota : RanceRule
@@ -11,6 +13,7 @@ public class Quota : RanceRule
         Maximum = 0;
     }
 
+    [BsonCtor]
     public Quota(int max, int min)
     {
         Minimum = min;
