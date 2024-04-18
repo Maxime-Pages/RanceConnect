@@ -18,5 +18,10 @@ namespace RanceConnect
             Name = name;
             DateAdded = dateAdded;
         }
+
+         public override string ToString()
+        {
+            return $"Name: {Name}, DateAdded: {DateAdded}";
+        }
     }
 }
