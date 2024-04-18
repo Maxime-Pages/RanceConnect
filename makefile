@@ -8,4 +8,5 @@ server ::
 	docker run -d -p 11000:11000 -v .\db\:\db\ $(SERVER_IMAGE)
 
 client ::
-	echo "hello :D"
+	dotnet restore "./app/Rance Connect/"
+	dotnet run --project "./app/Rance Connect/Rance App.csproj"
