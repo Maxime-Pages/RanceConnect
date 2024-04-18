@@ -184,7 +184,7 @@ class RanceServer
 
     public static byte[] /*List<Log>*/ HandleQueryLogs()
     {
-        return Serializer.Serialize(db.GetCollection<Log>("logs").FindAll().ToList());
+        return Serializer.Serialize(db.GetCollection<Log>("logs").FindAll().ToList().OrderBy(x => x.DateAdded).Take(50).ToList();
     }
 
     public static byte[] /*List<Alert>*/ HandleQueryRecentAlerts()
