@@ -14,20 +14,13 @@ class RanceServer
     {
         db = new LiteDatabase("./temp.db");
         AppDomain.CurrentDomain.ProcessExit += (s, e) => db?.Dispose();
-
-        BsonMapper.Global.Entity<Provision>().Id(provision => provision.ID);
-        BsonMapper.Global.Entity<Product>().Id(product => product.EAN);
-        BsonMapper.Global.Entity<Category>().Id(category => category.GetHashCode());
-        BsonMapper.Global.Entity<RanceRule>().Id(rule => rule.GetHashCode());
-        BsonMapper.Global.Entity<Alert>().Id(alert => alert.GetHashCode());
-        BsonMapper.Global.Entity<Log>().Id(log => log.GetHashCode());
+        BsonMapper.Global.IncludeFields = true;
 
         TcpListener listener = new TcpListener(IPAddress.Any, 11000);
 
         listener.Start();
 
         Console.WriteLine("Ready to accept connections");
-        //Listening Loop
         while (true) {
 
             TcpClient handler = listener.AcceptTcpClient() ;
