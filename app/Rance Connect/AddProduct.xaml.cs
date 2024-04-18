@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace Rance_App
 {
@@ -115,8 +116,21 @@ namespace Rance_App
                 return;
             if (!float.TryParse(SalesPrice.Text, out float salesPrice))
                 return;
-            Interactions.AddProduct(Name.Text, EAN.Text, price, salesPrice, DateTime.Now, int.Parse(MinimalStock.Text), int.Parse(StockToReach.Text));
+
+            List<RanceRule> rules = new List<RanceRule>();
+            rules.Add(new Quota(int.Parse(MinimalStock.Text), int.Parse(StockToReach.Text)));
+            rules.Add(new Expiration(TimeSpan.FromDays(double.Parse(ExpirationAlert.Text))));
+            List<Category> sCategs = new List<Category>();
+            foreach (Category c in categories)
+            {
+                if (selectedCategories.Contains(c.Name))
+                    sCategs.Add(c);
+            }
+            RanceConnect.Product p = new RanceConnect.Product(Name.Text, EAN.Text, price, salesPrice, 0, DateTime.Now, sCategs.ToArray(), rules.ToArray());
             NavigationService ns = NavigationService.GetNavigationService(this);
+            if (Interactions.AddProduct(p) == null)
+                ns.Content = new Alertes();
+
             ns.Content = new Stock();
         }
     }

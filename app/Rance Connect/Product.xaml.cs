@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Rance_App
 {
@@ -68,6 +69,23 @@ namespace Rance_App
             NavigationService ns = NavigationService.GetNavigationService(this);
             ns.GoBack();
         }
+        private void BackSave_Click(object sender, RoutedEventArgs e)
+        {
+            Price.Text = Price.Text.Replace(".", ",");
+            SalesPrice.Text = SalesPrice.Text.Replace(".", ",");
+            if (!float.TryParse(Price.Text, out float price))
+                return;
+            if (!float.TryParse(SalesPrice.Text, out float salesPrice))
+                return;
+
+            product.Price = price;
+            product.Salesamount = salesPrice;
+            NavigationService ns = NavigationService.GetNavigationService(this);
+            if (!Interactions.UpdateProduct(product))
+                ns.Content = new Alertes();
+            ns.Content = new Stock();
+        }
+
         private void CategoriesButton_Click(object sender, RoutedEventArgs e)
         {
             categoriesObserved = new ObservableCollection<mutableTuple>(); // <|°_°|>
@@ -96,7 +114,13 @@ namespace Rance_App
             if (!categories.Exists(x => x.Name == NewCategText.Text))
             {
                 Category categ = new Category(NewCategText.Text, []);
-                Interactions.AddCategory(categ);
+
+
+                if (Interactions.AddCategory(categ) != null)
+                {
+                    NavigationService ns = NavigationService.GetNavigationService(this);
+                    ns.Content = new Alertes();
+                }
                 categories.Add(categ);
                 categoriesObserved.Add(new mutableTuple(false, NewCategText.Text)); 
             }
@@ -108,8 +132,13 @@ namespace Rance_App
             mutableTuple observed = categoriesObserved.First(x => x.Name == name);
             Category resCategory = categories.First(x => x.Name == observed.Name);
             categories.Remove(resCategory);
-            Interactions.RemoveCategory(resCategory);
-            
+
+
+            if (!Interactions.RemoveCategory(resCategory))
+            {
+                NavigationService ns = NavigationService.GetNavigationService(this);
+                ns.Content = new Alertes();
+            }
             categoriesObserved.Remove(observed);
         }
 
@@ -124,9 +153,16 @@ namespace Rance_App
             }
             if(chk.IsChecked.Value)
             {
+                List<Category> categs = product.Categories.ToList();
+                categs.Add(resCategory);
+                product.Categories = categs.ToArray();
                 tmp.Add(resCategory);
             } else
             {
+
+                List<Category> categs = product.Categories.ToList();
+                categs.Remove(resCategory);
+                product.Categories = categs.ToArray();
                 tmp.Remove(resCategory);
             }
             product.Categories = tmp.ToArray();

@@ -61,23 +61,23 @@ namespace Rance_App
             return Serializer.Deserialize<List<Alert>>(DataSender.Send([], Command.GET_RECENT_ALERTS));
         }
 
-        public static void AddProduct(string name, string ean, float price, float salesAmount, DateTime dateAdded, int lowStock, int MaxStock)
+        public static RanceConnect.Product AddProduct(RanceConnect.Product p)
         {
-           /* //TODO : Add Rules Support
-            List<RanceRule> rules = new List<RanceRule>();
-            rules.Add(new Expiration())*/
-            RanceConnect.Product p = new RanceConnect.Product(name, ean, price, salesAmount, 0, dateAdded, null, null);
-            DataSender.Send(Serializer.Serialize(p), Command.ADD_PRODUCT);
+            return Serializer.Deserialize < RanceConnect.Product > (DataSender.Send(Serializer.Serialize(p), Command.ADD_PRODUCT));
         }
 
-        internal static void UpdateProduct(RanceConnect.Product product)
+        internal static bool UpdateProduct(RanceConnect.Product product)
         {
-            DataSender.Send(Serializer.Serialize(product), Command.EDIT_PRODUCT);
+            return Serializer.Deserialize<bool>(DataSender.Send(Serializer.Serialize(product), Command.EDIT_PRODUCT));
         }
 
-        internal static void AddCategory(Category category)
+        internal static Category AddCategory(Category category)
         {
-            DataSender.Send(Serializer.Serialize(category), Command.EDIT_CATEGORY);
+            return Serializer.Deserialize<Category>(DataSender.Send(Serializer.Serialize(category), Command.ADD_CATEGORIES));
+        }
+        internal static bool UpdateCategory(Category category)
+        {
+            return Serializer.Deserialize<bool>(DataSender.Send(Serializer.Serialize(category), Command.EDIT_CATEGORY));
         }
 
         internal static bool RemoveCategory(Category category)

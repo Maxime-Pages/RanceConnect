@@ -64,7 +64,7 @@
                 <Button Content="Ajouter" Click="AddCategory_Click" Width="50" Grid.Column="1" HorizontalAlignment="Right" Background="#FF8DFF83" Foreground="#FF131313" BorderBrush="{x:Null}"/>
             </Grid>
         </Grid>
-        
+
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
@@ -78,10 +78,11 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid>
-                    <Button Content="Supprimer le produit" Click="Remove_Click" Width="150" Margin="30,0,0,0" HorizontalAlignment="Left" Background="#FFC71818" Foreground="White"/>
-                    <TextBox x:Name="Name" Text="Product Name" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="300" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" FontSize="20" TextAlignment="Center"/>
-                    <Button x:Name="CategorieButton" Content="Afficher les catégories" Width="150" Margin="0,0,60,0" HorizontalAlignment="Right" Click="CategoriesButton_Click"/>
-                    <Button Content="X" Click="Back_Click" Width="30" Margin="0,0,0,0" HorizontalAlignment="Right" Background="{x:Null}" Foreground="#FF7D0000" BorderBrush="#FF373737"/>
+                    <Button Content="Supprimer le produit" Click="Remove_Click" Width="123" Margin="10,0,0,0" HorizontalAlignment="Left" Background="#FFC71818" Foreground="White"/>
+                    <Button x:Name="CategorieButton" Content="Afficher les catégories" Width="128" Margin="138,0,0,0" HorizontalAlignment="Left" Click="CategoriesButton_Click"/>
+                    <TextBox x:Name="Name" ScrollViewer.HorizontalScrollBarVisibility="Auto" Text="Product Name" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="238" Background="Transparent" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" FontSize="20" TextAlignment="Center"/>
+                    <Button Content="Quitter" Click="Back_Click" Width="59" Margin="721,0,0,0" HorizontalAlignment="Left" Background="#FFFFB8B8" Foreground="Red" BorderBrush="#FF373737"/>
+                    <Button Content="Quitter et sauvegarder" Click="BackSave_Click" Width="130" Margin="586,0,0,0" HorizontalAlignment="Left" Background="#FFCBFFB8" Foreground="#FF0F7D00" BorderBrush="#FF373737"/>
                 </Grid>
                 <TextBox Grid.Row="1" x:Name="EAN" Text="Product EAN" HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="600" Background="Transparent" Foreground="#FFDADADA" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Column="1" TextAlignment="Center"/>
 
@@ -122,7 +123,7 @@
                 <TextBox x:Name="ProvisionDate" Width="100" Grid.Column="1" HorizontalAlignment="Right"/>
                 <Button Grid.Column="2" Background="Green" Content="Ajouter Provision" Click="Provision_Click" HorizontalAlignment="Left" Padding="10,0,10,0" Margin="5,0,0,0" Width="120"/>
             </Grid>
-            
+
             <DataGrid Grid.Row="3" Margin="10,0,10,30" x:Name="Packs" Background="#FF43484E" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Header="ID Lot" IsReadOnly="True" CanUserResize="False" Width="*">
