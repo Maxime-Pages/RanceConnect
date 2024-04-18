@@ -1,4 +1,4 @@
-SERVER_IMAGE = "ranceserver"
+SERVER_IMAGE = ranceserver
 
 
 all :: server client
