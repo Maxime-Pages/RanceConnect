@@ -1,12 +1,12 @@
 
 namespace RanceConnect;
 
-public class Expiration : RanceRule
+public class Expiration(TimeSpan dW) : RanceRule
 {
-    TimeSpan deltawarning;
+    public TimeSpan Deltawarning = dW;
     public override bool IsValid(object input)
     {
-        return (DateTime)input - DateTime.Now > deltawarning;
+        return (DateTime)input - DateTime.Now > Deltawarning;
     }
 
 
