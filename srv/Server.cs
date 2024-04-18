@@ -3,7 +3,6 @@ using Command = RanceConnect.Command;
 using System.Net;
 using System.Net.Sockets;
 using LiteDB;
-using System.Data;
 
 namespace RanceServer;
 
@@ -206,10 +205,6 @@ class RanceServer
     {
         Console.WriteLine(product.Name);
         db.GetCollection<Product>("products").Insert(product.EAN, product);
-        foreach(RanceRule rule in product.Rules)
-        {
-            db.GetCollection<RanceRule>("rules").Insert(product.EAN, rule);
-        }
         return Serializer.Serialize(product);
     }
 
@@ -284,8 +279,8 @@ class RanceServer
         List<Alert> alerts = db.GetCollection<Alert>("alerts").FindAll().ToList();
         foreach (Product product in db.GetCollection<Product>("products").FindAll())
         {
-            List<RanceRule> rules = db.GetCollection<RanceRule>("rules").FindById(product.EAN);
-            foreach (RanceRule rule)
+            if (product.Rules == null) continue;
+            foreach (RanceRule rule in product.Rules)
             {
                 switch (rule.GetType().Name)
                 {
