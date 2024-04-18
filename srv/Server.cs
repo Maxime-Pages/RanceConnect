@@ -14,7 +14,6 @@ class RanceServer
     {
         db = new LiteDatabase("./temp.db");
         AppDomain.CurrentDomain.ProcessExit += (s, e) => db?.Dispose();
-        BsonMapper.Global.IncludeFields = true;
 
         TcpListener listener = new TcpListener(IPAddress.Any, 11000);
 
