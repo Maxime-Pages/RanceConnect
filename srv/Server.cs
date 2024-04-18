@@ -42,7 +42,7 @@ class RanceServer
             byte[] body = data.Skip(6).ToArray();
             byte[] response = null;
             Log log = new Log($"User {remoteIP} sent {command}", DateTime.Now);
-            db.GetCollection<Log>("log").Insert(log.GetHashCode(),log);
+            db.GetCollection<Log>("logs").Insert(log.GetHashCode(),log);
             Console.WriteLine(log.ToString());
             switch (command)
             {
