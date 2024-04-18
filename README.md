@@ -85,7 +85,8 @@ Le script se chargera ensuite de télécharger de lui même le reste des dépend
 
 ### Client
 
-Un fichier .exe est fourni dans l'onglet release, il duffit de le télécharger et de le lancer. Il faut cependant avoir un serveur qui tourne auquel se connecter, car certaines exceptions ne sont pas encore gérées.
+Un fichier .exe est fourni dans l'onglet release, il suffit de le télécharger et de le lancer. Il faut cependant avoir un serveur qui tourne auquel se connecter, car certaines exceptions ne sont pas encore gérées.
+On peut également utiliser l'option "make client", qui va build la solution client lui même, et lancer une instance de l'application qui se connectera au serveur. Utiliser la commande "make" seule permet de lancer le serveur puis le serveur automatiquement. 
 
 ## Utilisation
 
