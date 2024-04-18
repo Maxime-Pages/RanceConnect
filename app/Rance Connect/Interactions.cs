@@ -13,7 +13,6 @@ namespace Rance_App
         public static List<RanceConnect.Product> QueryStock()
         {
             return Serializer.Deserialize<List<RanceConnect.Product>>(DataSender.Send([], RanceConnect.Command.GET_STOCK));
-//            Serializer.Deserialize<List<RanceConnect.Product>>(DataSender.Send(Serializer.Serialize()))
         }
 
         public static int QueryStockCount()

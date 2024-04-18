@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Rance_App"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="500" MinWidth="900" Height="700" Width="940">
+        Title="MainWindow" MinHeight="500" MinWidth="1000" Height="700" Width="1000">
 
     <Grid Background="#232628">
         <Menu Background="#FF2E333A" HorizontalAlignment="Left" Width="140">

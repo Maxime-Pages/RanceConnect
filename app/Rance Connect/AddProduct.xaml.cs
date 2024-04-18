@@ -133,5 +133,18 @@ namespace Rance_App
 
             ns.Content = new Stock();
         }
+
+        private void Name_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox txt = (sender as TextBox);
+            if (txt.Text.Contains("Insérer le Nom du produit") && txt.Text != "Insérer le Nom du produit")
+            {
+                txt.Text = txt.Text.Replace("Insérer le Nom du produit", "");
+            }
+            if (txt.Text.Contains("Insérer l'EAN du produit") && txt.Text != "Insérer l'EAN du produit")
+            {
+                txt.Text = txt.Text.Replace("Insérer l'EAN du produit", "");
+            }
+        }
     }
 }

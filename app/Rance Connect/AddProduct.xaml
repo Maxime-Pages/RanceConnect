@@ -32,9 +32,9 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid>
-                    <TextBox x:Name="Name" Text="Insérer le Nom du produit" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="350" Background="#FF6D6D6D" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" FontSize="20" TextAlignment="Center"/>
+                    <TextBox x:Name="Name" TextChanged="Name_TextChanged" Text="Insérer le Nom du produit" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="350" Background="#FF6D6D6D" Foreground="White" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" FontSize="20" TextAlignment="Center"/>
                 </Grid>
-                <TextBox Grid.Row="1" x:Name="EAN" Text="Insérer l'EAN du produit" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Background="#FF6D6D6D" Foreground="#FFDADADA" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Column="1" TextAlignment="Center"/>
+                <TextBox Grid.Row="1" x:Name="EAN" TextChanged="Name_TextChanged" Text="Insérer l'EAN du produit" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Width="200" Background="#FF6D6D6D" Foreground="#FFDADADA" BorderBrush="#00ABADB3" SelectionTextBrush="Transparent" Grid.Column="1" TextAlignment="Center"/>
             </Grid>
             <Grid Grid.Row="2" Margin="10,0,10,0" Background="#FF43484E">
                 <Grid.ColumnDefinitions>

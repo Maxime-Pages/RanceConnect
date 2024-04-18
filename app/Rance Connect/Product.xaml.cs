@@ -91,7 +91,8 @@ namespace Rance_App
             categoriesObserved = new ObservableCollection<mutableTuple>(); // <|°_°|>
             foreach (Category category in categories)
             {
-                if (product.Categories != null && product.Categories.Contains(category))
+                string cName = category.Name;
+                if (product.Categories != null && product.Categories.First(x => x.Name == cName) != null)
                 {
                     categoriesObserved.Add(new mutableTuple(true, category.Name));
                 } else
@@ -116,7 +117,7 @@ namespace Rance_App
                 Category categ = new Category(NewCategText.Text, []);
 
 
-                if (Interactions.AddCategory(categ) != null)
+                if (Interactions.AddCategory(categ) == null)
                 {
                     NavigationService ns = NavigationService.GetNavigationService(this);
                     ns.Content = new Alertes();
@@ -153,16 +154,9 @@ namespace Rance_App
             }
             if(chk.IsChecked.Value)
             {
-                List<Category> categs = product.Categories.ToList();
-                categs.Add(resCategory);
-                product.Categories = categs.ToArray();
                 tmp.Add(resCategory);
             } else
             {
-
-                List<Category> categs = product.Categories.ToList();
-                categs.Remove(resCategory);
-                product.Categories = categs.ToArray();
                 tmp.Remove(resCategory);
             }
             product.Categories = tmp.ToArray();
