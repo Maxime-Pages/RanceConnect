@@ -29,6 +29,10 @@ namespace Rance_App
             InitializeComponent();
             List<Alert> alerts = Interactions.QueryRecentAlerts();
             Alerts.ItemsSource = alerts;
+            //provi 1
+            ThresholdReached.Text = alerts.Where(x => x.Type == 1).Count().ToString();
+            //expi 0
+            OutdatedSoon.Text = alerts.Where(x => x.Type == 0).Count().ToString();
             StockCount.Text = Interactions.QueryStockCount().ToString();
             AlertsCount.Text = Interactions.QueryAlertsCount().ToString();
         }

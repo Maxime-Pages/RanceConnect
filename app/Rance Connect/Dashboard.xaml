@@ -32,20 +32,27 @@
             </Border>
             <Border Background="#FF43484E" Margin="10,0,10,0" Grid.Column="1" CornerRadius="10">
                 <DockPanel>
-                    <TextBlock TextWrapping="Wrap" Text="Bientôt Périmés" VerticalAlignment="Top" Height="18" Foreground="White" TextAlignment="Center" Margin="0,30,0,0" Width="140" DockPanel.Dock="Top"/>
-                    <TextBlock TextWrapping="Wrap" Text="X" Foreground="White" TextAlignment="Center" FontSize="14" DockPanel.Dock="Top" Height="18"/>
+                    <TextBlock TextWrapping="Wrap" Text="En Péremption" VerticalAlignment="Top" Height="18" Foreground="White" TextAlignment="Center" Margin="0,30,0,0" Width="140" DockPanel.Dock="Top"/>
+                    <TextBlock x:Name="OutdatedSoon" TextWrapping="Wrap" Text="X" Foreground="White" TextAlignment="Center" FontSize="14" DockPanel.Dock="Top" Height="18"/>
                 </DockPanel>
             </Border>
-            <Border Background="#FF43484E" Margin="10,0,10,0" Grid.Column="2" CornerRadius="10">
+            <Border Background="#FFCEBDBD" Grid.Column="2" CornerRadius="10">
                 <DockPanel>
-                    <TextBlock TextWrapping="Wrap" Text="Produits Périmés" VerticalAlignment="Top" Height="18" Foreground="White" TextAlignment="Center" Margin="0,30,0,0" Width="140" DockPanel.Dock="Top"/>
-                    <TextBlock TextWrapping="Wrap" Text="X" Foreground="White" TextAlignment="Center" FontSize="14" DockPanel.Dock="Top" Height="18"/>
+                    <TextBlock TextWrapping="Wrap" FontSize="20" Text="Bienvenue sur" Height="31" Foreground="White" TextAlignment="Center" Margin="0,20,0,0" Width="140" DockPanel.Dock="Top"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="67*"/>
+                            <ColumnDefinition Width="93*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock FontSize="24" TextAlignment="Right" TextWrapping="Wrap" Text="Rance" Foreground="#FF002654" DockPanel.Dock="Top" Margin="0,14,0,15"/>
+                        <TextBlock FontSize="24" TextAlignment="Left" Grid.Column="1" TextWrapping="Wrap" Text="Connect" Foreground="#FFED2939" DockPanel.Dock="Top" Margin="0,14,0,15"/>
+                    </Grid>
                 </DockPanel>
             </Border>
             <Border Background="#FF43484E" Margin="10,0,10,0" Grid.Column="3" CornerRadius="10">
                 <DockPanel>
                     <TextBlock TextWrapping="Wrap" Text="Seuils Atteints" VerticalAlignment="Top" Height="18" Foreground="White" TextAlignment="Center" Margin="0,30,0,0" Width="140" DockPanel.Dock="Top"/>
-                    <TextBlock TextWrapping="Wrap" Text="X" Foreground="White" TextAlignment="Center" FontSize="14" DockPanel.Dock="Top" Height="18"/>
+                    <TextBlock x:Name="ThresholdReached" TextWrapping="Wrap" Text="X" Foreground="White" TextAlignment="Center" FontSize="14" DockPanel.Dock="Top" Height="18"/>
                 </DockPanel>
             </Border>
             <Border Background="#FF43484E" Margin="10,0,10,0" Grid.Column="4" CornerRadius="10">
