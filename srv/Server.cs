@@ -192,69 +192,69 @@ class RanceServer
         return Serializer.Serialize(db.GetCollection<Alert>("alerts").FindAll().OrderByDescending(alert => alert.DateAdded).ToList());
     }
 
-    public static byte[] /*void*/ HandleAddProduct(Product product)
+    public static byte[] /*Product*/ HandleAddProduct(Product product)
     {
         Console.WriteLine(product.Name);
         db.GetCollection<Product>("products").Insert(product.EAN, product);
         return Serializer.Serialize(product);
     }
 
-    public static byte[] /*void*/ HandleAddProvisions(Provision provision)
+    public static byte[] /*Provision*/ HandleAddProvisions(Provision provision)
     {
         provision.ID = Guid.NewGuid().ToString();
         db.GetCollection<Provision>("provisions").Insert(provision.ID,provision);
         return Serializer.Serialize(provision);
     }
 
-    public static byte[] /*void*/ HandleAddCategory(Category category)
+    public static byte[] /*Category*/ HandleAddCategory(Category category)
     {
         db.GetCollection<Category>("categories").Insert(category.GetHashCode(), category);
         return Serializer.Serialize(category);
     }
 
-    public static byte[] /*void*/ HandleAddRule(RanceRule rule)
+    public static byte[] /*Rule*/ HandleAddRule(RanceRule rule)
     {
         db.GetCollection<RanceRule>("rules").Insert(rule.GetHashCode(),rule);
         return Serializer.Serialize(rule);
     }
 
-    public static byte[] /*void*/ HandleEditProduct(Product product)
+    public static byte[] /*bool*/ HandleEditProduct(Product product)
     {
         return Serializer.Serialize(db.GetCollection<Product>("products").Update(product.EAN, product));
     }
 
-    public static byte[] /*void*/ HandleEditCategory(Category category)
+    public static byte[] /*bool*/ HandleEditCategory(Category category)
     {
         return Serializer.Serialize(db.GetCollection<Category>("categories").Update(category.GetHashCode(),category));
     }
 
-    public static byte[] /*void*/ HandleEditRule(RanceRule rule)
+    public static byte[] /*bool*/ HandleEditRule(RanceRule rule)
     {
         return Serializer.Serialize(db.GetCollection<RanceRule>("rules").Update(rule.GetHashCode(), rule));
     }
 
-    public static byte[] /*void*/ HandleEditProvisions(Provision provision)
+    public static byte[] /*bool*/ HandleEditProvisions(Provision provision)
     {
         return Serializer.Serialize(db.GetCollection<Provision>("provisions").Update(provision.ID,provision));
     }
 
-    public static byte[] /*void*/ HandleRemoveProduct(Product product)
+    public static byte[] /*bool*/ HandleRemoveProduct(Product product)
     {
         return Serializer.Serialize(db.GetCollection<Product>("products").Delete(product.EAN));
     }
 
-    public static byte[] /*void*/ HandleRemoveProvisions(Provision provision)
+    public static byte[] /*bool*/ HandleRemoveProvisions(Provision provision)
     {
         return Serializer.Serialize(db.GetCollection<Provision>("provisions").Delete(provision.ID));
     }
 
-    public static byte[] /*void*/ HandleRemoveCategory(Category category)
+    public static byte[] /*bool*/ HandleRemoveCategory(Category category)
     {
         return Serializer.Serialize(db.GetCollection<Category>("categories").Delete(category.GetHashCode()));
         
     }
 
-    public static byte[] /*void*/ HandleRemoveRule(RanceRule rule)
+    public static byte[] /*bool*/ HandleRemoveRule(RanceRule rule)
     {
         return Serializer.Serialize(db.GetCollection<RanceRule>("rules").Delete(rule.GetHashCode()));
         
