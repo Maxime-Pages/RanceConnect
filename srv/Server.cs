@@ -3,7 +3,6 @@ using Command = RanceConnect.Command;
 using System.Net;
 using System.Net.Sockets;
 using LiteDB;
-using System.ComponentModel;
 
 namespace RanceServer;
 
@@ -25,7 +24,6 @@ class RanceServer
         while (true) {
 
             TcpClient handler = listener.AcceptTcpClient() ;
-            Console.WriteLine("Connection accepted from " + handler.Client.RemoteEndPoint.ToString());
             Handle(handler, handler.Client.RemoteEndPoint.ToString());
         }
          
@@ -37,17 +35,15 @@ class RanceServer
     {
         NetworkStream stream = client.GetStream();
         byte[] data = Receive(stream);
-        Console.WriteLine(BitConverter.ToString(data));
         int validationtoken = BitConverter.ToInt32(data.Take(4).ToArray());//First 4 are token
         if (ValidateToken(validationtoken)) //TODO: Implement this
         {
             Command command = (Command)BitConverter.ToChar(data.Skip(4).Take(2).ToArray()); //Next 1 is command
-            Console.WriteLine(command);
             byte[] body = data.Skip(6).ToArray();
             byte[] response = null;
-            Console.WriteLine(BitConverter.ToString(body));
             Log log = new Log($"User {remoteIP} sent {command}", DateTime.Now);
             db.GetCollection<Log>("log").Insert(log.GetHashCode(),log);
+            Console.WriteLine(log.ToString());
             switch (command)
             {
                 case Command.GET_STOCK:
@@ -122,16 +118,13 @@ class RanceServer
     //TODO: Will crash if less than 2 bytes were recieved during first recieve call but I don't want to bother fixing it
     public static byte[] Receive(NetworkStream stream)
     {
-        Console.WriteLine("Receiving data");
-
         byte[] buffer = new byte[2];
         stream.Read(buffer, 0, 2);
         int len = BitConverter.ToInt16(buffer);
         byte[] data = new byte[len - 2];
 
         for (int i = 2; i < len; i += stream.Read(data, 0, len - i)) ;
-
-        Console.WriteLine("Data received");
+        
         return data;
     }
 
