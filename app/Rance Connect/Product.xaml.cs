@@ -37,8 +37,8 @@ namespace Rance_App
             product = Interactions.QueryProduct(ean);
             categories = Interactions.QueryCategories();
             Name.Text = product.Name;
-            Price.Text = product.Price.ToString();
-            SalesPrice.Text = product.Salesamount.ToString();
+            Price.Text = product.Price.ToString("0.00");
+            SalesPrice.Text = product.Salesamount.ToString("0.00");
             int quantity = 0;
             foreach (Provision p in provisions)
             {
@@ -91,8 +91,7 @@ namespace Rance_App
             categoriesObserved = new ObservableCollection<mutableTuple>(); // <|°_°|>
             foreach (Category category in categories)
             {
-                string cName = category.Name;
-                if (product.Categories != null && product.Categories.First(x => x.Name == cName) != null)
+                if (product.Categories != null &&  product.Categories.Contains(category))
                 {
                     categoriesObserved.Add(new mutableTuple(true, category.Name));
                 } else

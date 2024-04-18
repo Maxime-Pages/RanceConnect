@@ -11,6 +11,7 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis1"/>
         <BooleanToVisibilityConverter x:Key="BoolToVis2"/>
+        <local:DecimalRoundConverter x:Key="DecimalRoundConverter"/>
         <local:CategoriesConverter x:Key="CategoriesConverter"/>
     </Page.Resources>
     <Grid>
@@ -84,8 +85,8 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Price}"/>
-                            </StackPanel>
+                                    <TextBlock Text="{Binding Price, Converter={StaticResource DecimalRoundConverter}}"/>
+                                </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

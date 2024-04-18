@@ -40,26 +40,26 @@ namespace Rance_App
             Random random = new Random();
 
             // Add 20 different products to the Stock list one by one
-            Interactions.AddProduct(CreateProduct("Product 1"));
-            Interactions.AddProduct(CreateProduct("Product 2"));
-            Interactions.AddProduct(CreateProduct("Product 3"));
-            Interactions.AddProduct(CreateProduct("Product 4"));
-            Interactions.AddProduct(CreateProduct("Product 5"));
-            Interactions.AddProduct(CreateProduct("Product 6"));
-            Interactions.AddProduct(CreateProduct("Product 7"));
-            Interactions.AddProduct(CreateProduct("Product 8"));
-            Interactions.AddProduct(CreateProduct("Product 9"));
-            Interactions.AddProduct(CreateProduct("Product 10"));
-            Interactions.AddProduct(CreateProduct("Product 11"));
-            Interactions.AddProduct(CreateProduct("Product 12"));
-            Interactions.AddProduct(CreateProduct("Product 13"));
-            Interactions.AddProduct(CreateProduct("Product 14"));
-            Interactions.AddProduct(CreateProduct("Product 15"));
-            Interactions.AddProduct(CreateProduct("Product 16"));
-            Interactions.AddProduct(CreateProduct("Product 17"));
-            Interactions.AddProduct(CreateProduct("Product 18"));
-            Interactions.AddProduct(CreateProduct("Product 19"));
-            Interactions.AddProduct(CreateProduct("Product 20"));
+            //Interactions.AddProduct(CreateProduct("Product 1"));
+            //Interactions.AddProduct(CreateProduct("Product 2"));
+            //Interactions.AddProduct(CreateProduct("Product 3"));
+            //Interactions.AddProduct(CreateProduct("Product 4"));
+            //Interactions.AddProduct(CreateProduct("Product 5"));
+            //Interactions.AddProduct(CreateProduct("Product 6"));
+            //Interactions.AddProduct(CreateProduct("Product 7"));
+            //Interactions.AddProduct(CreateProduct("Product 8"));
+            //Interactions.AddProduct(CreateProduct("Product 9"));
+            //Interactions.AddProduct(CreateProduct("Product 10"));
+            //Interactions.AddProduct(CreateProduct("Product 11"));
+            //Interactions.AddProduct(CreateProduct("Product 12"));
+            //Interactions.AddProduct(CreateProduct("Product 13"));
+            //Interactions.AddProduct(CreateProduct("Product 14"));
+            //Interactions.AddProduct(CreateProduct("Product 15"));
+            //Interactions.AddProduct(CreateProduct("Product 16"));
+            //Interactions.AddProduct(CreateProduct("Product 17"));
+            //Interactions.AddProduct(CreateProduct("Product 18"));
+            //Interactions.AddProduct(CreateProduct("Product 19"));
+            //Interactions.AddProduct(CreateProduct("Product 20"));
 
             // Create a product with random properties
             RanceConnect.Product CreateProduct(string name)

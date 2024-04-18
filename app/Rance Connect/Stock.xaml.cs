@@ -176,4 +176,22 @@ namespace Rance_App
             throw new NotSupportedException();
         }
     }
+
+    public class DecimalRoundConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is float price)
+            {
+                return Math.Round(price, 2).ToString("0.00");
+            }
+
+            return value;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
