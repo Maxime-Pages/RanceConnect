@@ -179,6 +179,7 @@ class RanceServer
 
     public static byte[] /*List<Alert>*/ HandleQueryAlerts()
     {
+        ProcessAlerts();
         return Serializer.Serialize(db.GetCollection<Alert>("alerts").FindAll().ToList());
     }
 
@@ -189,6 +190,7 @@ class RanceServer
 
     public static byte[] /*List<Alert>*/ HandleQueryRecentAlerts()
     {
+        ProcessAlerts();
         return Serializer.Serialize(db.GetCollection<Alert>("alerts").FindAll().OrderByDescending(alert => alert.DateAdded).ToList());
     }
 
